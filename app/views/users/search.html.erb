@@ -1,0 +1,11 @@
+<h2>Search Results:</h2>
+
+<ul>
+  <% @users.each do |user| %>
+    <% if user != current_user %>
+      <li>
+        <%=link_to user.email, user_path(user)%>
+      </li>
+    <% end %>
+  <% end %>
+<ul>

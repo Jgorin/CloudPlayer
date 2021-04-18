@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CloudPlayer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  
+  <nav class="top-bar">
+    <h1><a href="/">CloudPlayer</a></h1>
+
+    <form action="/users/search">
+      <ul class="menu">
+          <li><label for="searchValue"/></li>
+          <li><input type="text" name="searchValue" id="searchValue"/></li>
+          <li><input type="submit" class="button" value="Submit"/></li>  
+      </ul>
+    </form>
+
+    <section class="top-bar-section">
+      <ul class="right">
+        <%- if current_user -%>
+          <p class="small_text"><%= "Signed in as #{current_user.email}" %><p>
+          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+          <% if request.path != "/users/#{current_user.id}" %>
+            <li><%= link_to 'Home', user_path(current_user)%></li>
+          <% end %>
+        <%- else -%>
+          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+          <li><%= link_to 'Sign In', new_user_session_path %></li>
+        <%- end -%>
+      </ul>
+    </section>
+  </nav>
+
+  <%- flash.each do |key, value| -%>
+    <div class="flash flash-<%= key %>">
+      <%= value %>
+    </div>
+  <%- end -%>
+
+  <%= yield %>
+
+  <%= javascript_include_tag 'application' %>
+  
+  <%- if Rails.env.development? || Rails.env.test? -%> 
+    <%= javascript_tag do %>
+      window.railsEnv = '<%= Rails.env %>'
+    <%- end -%>
+  <%- end -%>
+  <%= javascript_pack_tag 'application' %>
+  
+  <%= yield :extra_footer %>
+</body>
+</html>
