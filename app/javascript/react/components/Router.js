@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 
 import userProfile from "../userProfile"
-import SearchBar from "../searchBar"
+import SearchForm from "../search/searchForm"
 
 export const Router = (props) => {
   return (

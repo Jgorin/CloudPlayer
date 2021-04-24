@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :friendships
-  has_many :friends, through: :friendships
+  has_many :friends class_name: "User",  through: :friendships
 
+  has_many :friend_requests
   has_one_attached :avatar
 end

@@ -2,12 +2,13 @@ import { useEffect } from "react"
 import React, { useState } from "react"
 
 import FriendsList from "./friendsList"
+import SearchShow from "./search/searchShow"
 
 const userProfile = props => {
   const [profile, setProfile] = useState(null)
   const [friends, setFriends] = useState([])
   const [avatarUrl, setAvatarUrl] = useState([])
-  const [isCurrentUser, setIsCurrentUser] = useState(true)
+  const [currentUser, setCurrentUser] = useState(null)
 
   const fetchProfile = async () => {
     try{
@@ -21,15 +22,24 @@ const userProfile = props => {
       const parsedResponse = await response.json()
       setProfile(parsedResponse.user)
       setFriends(parsedResponse.friends)
-      setIsCurrentUser(parsedResponse.current_user == parsedResponse.user.id)
+      setCurrentUser(parsedResponse.current_user_id)
       if('avatar' in parsedResponse){
-        let avatarData = parsedResponse[3]
+        let avatarData = parsedResponse.avatarUrl
         setAvatarUrl(avatarData)
       }
     }
     catch(err){
       console.log("Error in fetching user profile...")
       console.log(err)
+    }
+  }
+
+  const sendFriendRequest = async(event) => {
+    try{
+      const response = await fetch(`/api/v1/users/send_friend_request`, {method: "PATCH", body: JSON.stringify({receiver_id: profile.id, sender_id: currentUser})})
+    }
+    catch(err){
+
     }
   }
 
@@ -40,9 +50,14 @@ const userProfile = props => {
 
   const profileName = profile == null ? null : profile.email
 
+  let isCurrentUser = false
+  if(profile != null && profile.id == currentUser){
+    isCurrentUser = true
+  }
+
   let addFriendButton = null
   if(!isCurrentUser){
-    addFriendButton = <p className="button" style={{marginLeft: "50px"}}>Add Friend</p>
+    addFriendButton = <p className="button" style={{marginLeft: "50px"}} onClick={sendFriendRequest}>Add Friend</p>
   }
 
   return(
@@ -53,6 +68,7 @@ const userProfile = props => {
       </div>
       <img src={avatarUrl}></img>
       <FriendsList friendsData={friends}/>
+      <SearchShow/>
     </div>
   )
 }
