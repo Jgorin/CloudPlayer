@@ -26,7 +26,7 @@ const SearchShow = props => {
   return(
     <div>
       <SearchForm handleSubmit ={handleSubmit}/>
-      <SearchResults results={results} currentUser={currentUser} setCurrentUser={setCurrentUser} setUser={setUser} fetchProfile={fetchProfile}/>
+      <SearchResults results={results} setResults={setResults} currentUser={currentUser} setCurrentUser={setCurrentUser} setUser={setUser} fetchProfile={fetchProfile}/>
     </div>
   )
 }

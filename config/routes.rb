@@ -18,7 +18,7 @@ Rails.application.routes.draw do
         collection do
           get 'search'
         end
-        resources :friend_requests, only: [:create]
+        resources :friend_requests, only: [:create, :destroy]
       end
     end
   end

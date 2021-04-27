@@ -3,12 +3,13 @@ import { Link } from "react-router-dom"
 import FriendButton from "../friendButton"
 
 const SearchResults = props => {
-  const { results, currentUser, setCurrentUser, fetchProfile } = props
+  const { results, setResults, currentUser, setCurrentUser, fetchProfile } = props
 
   const resultsList = results.map((result) => {
 
     const fetchProfileWrapper = () => {
       fetchProfile(result.id)
+      setResults([])
     }
 
     return(

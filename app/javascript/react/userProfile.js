@@ -65,8 +65,16 @@ const userProfile = props => {
         <h2>{isCurrentUser ? "Your Profile" : `${profileName}'s profile`}</h2>
         <FriendButton user={user} currentUser={currentUser} setUser={setUser} setCurrentUser={setCurrentUser}/> 
       </div>
-      <FriendsList friendsData={user.friends} currentUserId={currentUser} setUser={setUser} fetchProfile={fetchProfile}/>
-      <SearchShow currentUser={currentUser} setCurrentUser={setCurrentUser} setUser={setUser} fetchProfile={fetchProfile}/>
+      <FriendsList
+        friendsData={user.friends} 
+        currentUserId={currentUser} 
+        setUser={setUser} 
+        fetchProfile={fetchProfile}/>
+      <SearchShow
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        setUser={setUser}
+        fetchProfile={fetchProfile}/>
     </div>
   )
 }
