@@ -237,7 +237,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activestorage
   capybara
   database_cleaner
   devise
