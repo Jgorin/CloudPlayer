@@ -3,16 +3,25 @@ import React, { useState } from "react"
 
 import FriendsList from "./friendsList"
 import SearchShow from "./search/searchShow"
+import FriendButton from "./friendButton"
+
+const defaultProfile = {
+  id: null,
+  email: "",
+  password: "",
+  friends: [],
+  friend_requests: {
+    incoming: [], 
+    outgoing: []
+  }
+}
 
 const userProfile = props => {
-  const [profile, setProfile] = useState(null)
-  const [friends, setFriends] = useState([])
-  const [avatarUrl, setAvatarUrl] = useState([])
-  const [currentUser, setCurrentUser] = useState(null)
+  const [user, setUser] = useState(defaultProfile)
+  const [currentUser, setCurrentUser] = useState(defaultProfile)
 
-  const fetchProfile = async () => {
+  const fetchProfile = async (profileId) => {
     try{
-      let profileId = props.match.params.id
       const response = await fetch(`/api/v1/users/${profileId}`)
       if(!response.ok){
         let errorMessage = `${response.status} (${response.statusText})`
@@ -20,13 +29,14 @@ const userProfile = props => {
         throw(error)
       }
       const parsedResponse = await response.json()
-      setProfile(parsedResponse.user)
-      setFriends(parsedResponse.friends)
-      setCurrentUser(parsedResponse.current_user_id)
-      if('avatar' in parsedResponse){
-        let avatarData = parsedResponse.avatarUrl
-        setAvatarUrl(avatarData)
-      }
+      setUser({...parsedResponse.user,
+        ["friends"]: parsedResponse.friends, 
+        ["friend_requests"]: parsedResponse.friend_requests
+      })
+      setCurrentUser({...parsedResponse.current_user, 
+        ["friends"]: parsedResponse.current_user_friends, 
+        ["friend_requests"]: parsedResponse.current_user_friend_requests
+      })
     }
     catch(err){
       console.log("Error in fetching user profile...")
@@ -34,41 +44,29 @@ const userProfile = props => {
     }
   }
 
-  const sendFriendRequest = async(event) => {
-    try{
-      const response = await fetch(`/api/v1/users/send_friend_request`, {method: "PATCH", body: JSON.stringify({receiver_id: profile.id, sender_id: currentUser})})
-    }
-    catch(err){
-
-    }
-  }
-
   useEffect(() => {
-    fetchProfile()
+    fetchProfile(props.match.params.id)
   }, [])
 
-
-  const profileName = profile == null ? null : profile.email
-
+  let profileName = null
   let isCurrentUser = false
-  if(profile != null && profile.id == currentUser){
-    isCurrentUser = true
-  }
 
-  let addFriendButton = null
-  if(!isCurrentUser){
-    addFriendButton = <p className="button" style={{marginLeft: "50px"}} onClick={sendFriendRequest}>Add Friend</p>
+  if(user != null && currentUser != null){
+    profileName = user.email
+
+    if(user.id == currentUser.id){
+      isCurrentUser = true
+    }
   }
 
   return(
     <div>
       <div className="grid-x padding">
         <h2>{isCurrentUser ? "Your Profile" : `${profileName}'s profile`}</h2>
-        {addFriendButton}    
+        <FriendButton user={user} currentUser={currentUser} setUser={setUser} setCurrentUser={setCurrentUser}/> 
       </div>
-      <img src={avatarUrl}></img>
-      <FriendsList friendsData={friends}/>
-      <SearchShow/>
+      <FriendsList friendsData={user.friends} currentUserId={currentUser} setUser={setUser} fetchProfile={fetchProfile}/>
+      <SearchShow currentUser={currentUser} setCurrentUser={setCurrentUser} setUser={setUser} fetchProfile={fetchProfile}/>
     </div>
   )
 }

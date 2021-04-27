@@ -1,14 +1,20 @@
 import React from "react"
+import { Link } from "react-router-dom"
+import FriendButton from "../friendButton"
 
 const SearchResults = props => {
-  const { results } = props
+  const { results, currentUser, setCurrentUser, fetchProfile } = props
 
   const resultsList = results.map((result) => {
 
+    const fetchProfileWrapper = () => {
+      fetchProfile(result.id)
+    }
+
     return(
-      <li class="grid-x">
-        <a href={`/users/${result.id}`}>{result.email}</a>
-        <p class="button">Add Friend</p>
+      <li className="grid-x" key={result.id}>
+        <Link to={`/users/${result.id}`} onClick={fetchProfileWrapper}>{result.email}</Link>
+        <FriendButton user={result} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       </li>
     )
   })

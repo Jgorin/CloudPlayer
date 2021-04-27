@@ -16,9 +16,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:show] do
         collection do
-          patch "send_friend_request"
           get 'search'
         end
+        resources :friend_requests, only: [:create]
       end
     end
   end

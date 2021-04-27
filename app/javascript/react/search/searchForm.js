@@ -18,12 +18,13 @@ const SearchForm = props => {
   const handleSubmitWrapper = (event) => {
     event.preventDefault()
     handleSubmit(formState.searchValue)
+    setFormState(defaultFormState)
   }
 
   return(
     <form onSubmit={handleSubmitWrapper}>
-      <input type="text" name="searchValue" id="searchValue" onChange={handleStateChange}/>
-      <input type="submit" class="button" value="Search"/>
+      <input type="text" name="searchValue" id="searchValue" onChange={handleStateChange} value={formState.searchValue}/>
+      <input type="submit" className="button" value="Search"/>
     </form>
   )
 }

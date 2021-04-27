@@ -5,6 +5,7 @@ import SearchResults from "./searchResults"
 
 const SearchShow = props => {
   const [results, setResults] = useState([])
+  const { currentUser, setCurrentUser, setUser, fetchProfile } = props
 
   const handleSubmit = async(formValue) => {
     try{
@@ -16,7 +17,6 @@ const SearchShow = props => {
       }
       const parsedResponse = await response.json()
       setResults(parsedResponse)
-      setFormState(defaultFormState)
     }
     catch(err){
       console.log(err)
@@ -26,7 +26,7 @@ const SearchShow = props => {
   return(
     <div>
       <SearchForm handleSubmit ={handleSubmit}/>
-      <SearchResults results={results}/>
+      <SearchResults results={results} currentUser={currentUser} setCurrentUser={setCurrentUser} setUser={setUser} fetchProfile={fetchProfile}/>
     </div>
   )
 }
