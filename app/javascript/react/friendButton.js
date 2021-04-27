@@ -74,10 +74,10 @@ const FriendButton = props => {
 
   const handleDeleteChanges = (changes) => {
     let currentUserFriendRequests = currentUser.friend_requests
-    currentUserFriendRequests.outgoing = currentUserFriendRequests.outgoing.filter((request) => {request !== changes.sender})
+    currentUserFriendRequests.outgoing = currentUserFriendRequests.outgoing.filter(user => user.id !== changes.receiver.id )
     if(setUser != null){
       let userFriendRequests = user.friend_requests
-      userFriendRequests.incoming = userFriendRequests.incoming.filter((request) => {request !== changes.sender})
+      userFriendRequests.incoming = userFriendRequests.incoming.filter(user => user.id !== changes.sender.id)
       setUser({
         ...user,
         ["friend_requests"]: userFriendRequests
