@@ -60,21 +60,24 @@ const userProfile = props => {
   }
 
   return(
-    <div>
-      <div className="grid-x padding">
-        <h2>{isCurrentUser ? "Your Profile" : `${profileName}'s profile`}</h2>
-        <FriendButton user={user} currentUser={currentUser} setUser={setUser} setCurrentUser={setCurrentUser}/> 
+    <div className="grid-x grid-margin-x padding">
+      <div className="cell small-6 outlined">
+        <h2 className="centered">{isCurrentUser ? "Your Profile" : `${profileName}`}
+          <FriendButton user={user} currentUser={currentUser} setUser={setUser} setCurrentUser={setCurrentUser}/> 
+        </h2>
+        <FriendsList
+          friendsData={user.friends} 
+          currentUserId={currentUser} 
+          setUser={setUser} 
+          fetchProfile={fetchProfile}/>
       </div>
-      <FriendsList
-        friendsData={user.friends} 
-        currentUserId={currentUser} 
-        setUser={setUser} 
-        fetchProfile={fetchProfile}/>
-      <SearchShow
-        currentUser={currentUser}
-        setCurrentUser={setCurrentUser}
-        setUser={setUser}
-        fetchProfile={fetchProfile}/>
+      <div className="cell small-6">
+        <SearchShow
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+          setUser={setUser}
+          fetchProfile={fetchProfile}/>
+      </div>
     </div>
   )
 }

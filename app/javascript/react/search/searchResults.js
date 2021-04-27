@@ -1,6 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
-import FriendButton from "../friendButton"
+import UserTile from "../userTile"
 
 const SearchResults = props => {
   const { results, setResults, currentUser, setCurrentUser, fetchProfile } = props
@@ -13,10 +12,13 @@ const SearchResults = props => {
     }
 
     return(
-      <li className="grid-x" key={result.id}>
-        <Link to={`/users/${result.id}`} onClick={fetchProfileWrapper}>{result.email}</Link>
-        <FriendButton user={result} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
-      </li>
+      <UserTile 
+        key={result.id}
+        result={result} 
+        fetchProfileWrapper={fetchProfileWrapper} 
+        currentUser={currentUser} 
+        setCurrentUser={setCurrentUser}
+      />
     )
   })
 
