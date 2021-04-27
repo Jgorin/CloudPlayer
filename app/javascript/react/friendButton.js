@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 const FriendButton = props => {
-  const { user, setUser, currentUser, setCurrentUser } = props
+  const { user, setUser, currentUser, setCurrentUser, defaultClass } = props
 
   const sendFriendRequest = async(event) => {
     try{
@@ -92,10 +92,17 @@ const FriendButton = props => {
   let label = null
   let button = null
   let interactFunction = null
+  let buttonClass = "button rounded autoMargin"
+
+  if(defaultClass != null && defaultClass != ""){
+    buttonClass += ` ${defaultClass}`
+  }
+
   if(user.id != null && currentUser.id != null && currentUser.id !== user.id){
     if(currentUser.friend_requests.outgoing.some(friend => friend.id === user.id)){
       label = "Cancel Friend Request"
       interactFunction = cancelFriendRequest
+      buttonClass += " secondary"
     }
     else if(currentUser.friend_requests.incoming.some(friend => friend.id === user.id)){
       label = "Accept Friend Request"
@@ -110,7 +117,7 @@ const FriendButton = props => {
   }
 
   if(label !== null){
-    button = <p className="button" onClick={interactFunction}>{label}</p> 
+    button = <p className={buttonClass} onClick={interactFunction}>{label}</p> 
   }
 
   return(
