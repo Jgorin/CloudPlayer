@@ -1,0 +1,32 @@
+@import "Colors.scss";
+
+.search-bar{
+  background-color: $light-gray;
+  height: 45px;
+}
+
+.background{
+  background: rgb(2,0,36);
+  background: linear-gradient(-5deg, rgb(29, 29, 29) 0%, rgb(68, 102, 84) 30%, rgb(158, 107, 102) 100%);
+}
+
+.indexScreen{
+  margin-top: 10em;
+  margin-left: 5em;
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  z-index: -5;  
+}
+
+.centered{
+  text-align: center;
+  top: 50%;
+  left: 50%;
+}

@@ -20,6 +20,17 @@ class Api::V1::FriendRequestsController < ApiController
     end
   end
 
+  def accept
+    find_users(params[:current_user], params[:user_id])
+    request = FriendRequest.where(sender: @sender, receiver: @receiver).first
+    friendship = Friendship.new(user: @sender, friend: @receiver)
+    if FriendRequest.destroy(request.id) && friendship.save
+      render json: {currentUser: @receiver, user: @sender}
+    else
+      render_not_found
+    end
+  end
+
   private
 
     def find_users(receiver_id, sender_id)
