@@ -46,7 +46,7 @@ export const POST = async(url, data) => {
   }
 }
 
-export const DELETE = async(fullUrl, data = null) => {
+export const DELETE = async(url, data = null) => {
   try{
     let fullUrl = baseUrl + url
     let params = {      

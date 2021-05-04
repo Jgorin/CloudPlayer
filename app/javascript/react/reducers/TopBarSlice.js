@@ -1,25 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-  status: "none",
-  isLoggedIn: false
-}
+const initialState = "none"
 
 const TopBarSlice = createSlice({
   name: "topbar",
   initialState,
   reducers: {
     setStatus(state, action){
-      state.status = action.payload
-    },
-    setIsLoggedIn(state, action){
-      state.isLoggedIn = action.payload
+      return action.payload
     }
   }
 })
 
-export const selectStatus = (state) => {return state.status}
-export const selectIsLoggedIn = (state) => {return state.isLoggedIn}
+export const selectStatus = (state) => {return state.topbar}
 
-export const { setStatus, setIsLoggedIn } = TopBarSlice.actions;
+export const { setStatus } = TopBarSlice.actions;
 export default TopBarSlice.reducer;

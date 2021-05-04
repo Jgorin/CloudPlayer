@@ -1,10 +1,13 @@
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import React from "react"
+import { Link, Redirect } from "react-router-dom"
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from "react-redux"
-import { setStatus, selectStatus, selectIsLoggedIn } from "./reducers/TopBarSlice"
+import { setCurrentUserState, selectCurrentUser } from "./reducers/CurrentUserInfoSlice"
+import { setStatus, selectStatus } from "./reducers/TopBarSlice"
 import SignUpForm from "./SignUpForm"
 import LogInForm from "./LogInForm"
+import { logout } from "./fetches/SessionFetches"
+import RedirectOnLogout from "./RedirectOnLogout"
 
 Modal.setAppElement(document.getElementById("app"));
 
@@ -26,7 +29,14 @@ const TopBar = props => {
   let login = false
   let signIn = false
   const dispatch = useDispatch()
-  let status = useSelector(selectStatus)
+  const status = useSelector(selectStatus)
+  const user = useSelector(selectCurrentUser)
+
+  const logoutWrapper = async() => {
+    const response = await logout()
+    dispatch(setCurrentUserState({id: null, email: ""}))
+  }
+  
   switch(status){
     case "login":
       login = true
@@ -60,13 +70,20 @@ const TopBar = props => {
     
   }
 
+  let button1 = <p><a onClick={toggleLoginStatus} className="white medium red-background">Log In</a></p>
+  let button2 = <p><a onClick={toggleSignUpStatus} className="white medium red-background">Sign Up</a></p>
+  if(user.id != null){
+    button1 = <p><Link to={`/users/${user.id}`} className="white medium red-background">home</Link></p>
+    button2 = <p><a className="white medium red-background" onClick={logoutWrapper}>Log Out</a></p>
+  }
+
   return(
     <div className="Topbar grid-x">
       <div className="cell small-10">
         <Link to="/"><p className="white large">CloudPlayer</p></Link>
       </div>
       <div className="cell small-1">
-        <p><a onClick={toggleLoginStatus} className="white medium red-background">Log In</a></p>
+        {button1}
         <Modal
           overlayClassName="overlay"
           isOpen={login}
@@ -80,7 +97,7 @@ const TopBar = props => {
       </div>
 
       <div className="cell small-1">
-      <p><a onClick={toggleSignUpStatus} className="white medium red-background">Sign Up</a></p>
+        {button2}
         <Modal
           overlayClassName="overlay"
           isOpen={signIn}
@@ -92,6 +109,8 @@ const TopBar = props => {
           <SignUpForm/>
         </Modal>
       </div>
+
+      {/* <RedirectOnLogout/> */}
     </div>
   )
 }
