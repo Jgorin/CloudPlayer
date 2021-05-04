@@ -1,0 +1,54 @@
+@import "Colors.scss";
+
+@keyframes popup {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.SignUpForm{
+  padding: 50px;
+}
+
+.SignUpForm .centered{
+  text-align: center;
+}
+
+.LoginForm{
+  padding: 25px;
+}
+
+.LoginForm .centered{
+  text-align: center;
+}
+
+.button{
+  background-color: $light-red !important;
+  border-radius: 19px !important;
+}
+
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255,255,255,0.25);
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+  opacity: 0.6;
+}
+

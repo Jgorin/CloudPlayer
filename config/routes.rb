@@ -18,7 +18,12 @@ Rails.application.routes.draw do
         collection do
           get 'search'
         end
-        resources :friend_requests, only: [:create, :destroy]
+        resources :friend_requests, only: [:create, :destroy] do
+          collection do
+            delete 'accept'
+          end
+        end
+        resources :friendships, only: [:destroy]
       end
     end
   end

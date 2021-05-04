@@ -1,14 +1,13 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { NavLink } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 const FriendsList = props => {
-  const { friendsData, currentUserId, fetchProfile } = props
+    
 
-  const friendsList = friendsData.map((friend) => {
-
+  const friendsList = friends.map((friend) => {
     let text = friend.email
-    if(currentUserId != null && friend.id === currentUserId.id){
+    if(currentUserId !== null && friend.id === currentUserId.id){
       text += " (you)"
     }
 
@@ -18,14 +17,13 @@ const FriendsList = props => {
 
     return(
       <li key={friend.id}>
-        <Link to={`/users/${friend.id}`} onClick={fetchProfileWrapper}>{text}</Link>
+        <Link to={`/users/${friend.id}`} onClick={fetchProfileWrapper} className="black">{text}</Link>
       </li>
     )
   })
 
   return(
     <div>
-      <h4>Friends:</h4>
       <ul>
         {friendsList}
       </ul>

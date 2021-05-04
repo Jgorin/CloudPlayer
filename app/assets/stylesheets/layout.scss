@@ -1,0 +1,61 @@
+@import "Colors.scss";
+
+.small_text{
+  font-size: 12px;
+}
+
+.padding{
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-top: 30px;
+}
+
+.indent{
+  margin-left: 5px;
+}
+
+.vertical-center{
+  margin: 0;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.outlined{
+  border: 2px solid rgba(92, 163, 211, 0.712);
+  background: rgba(237, 245, 250, 0.979);
+  padding: 10px;
+}
+
+.Topbar{
+  background: $dark-gray;
+  padding: 15px;
+  white-space: nowrap;
+}
+
+.transparent{
+  opacity: 0.8;
+}
+
+.light-red{
+  color: $light-red;
+}
+
+.red-background{
+  padding: 11px;
+  border-radius: 45px;
+  background-color: $light-red;
+}
+
+.white{
+  color: rgb(240,240,240);
+}
+
+.large{
+  font-size: 30px;
+}
+
+.medium{
+  font-size: 23px;
+}
