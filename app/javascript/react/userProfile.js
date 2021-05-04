@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { selectUser } from "./reducers/UserInfoSlice"
 import RootFetch from "./fetches/RootFetch"
-import ProfileBar from "./ProfileBar"
+import SearchBar from "./SearchBar"
 import ProfileSideBar from "./ProfileSideBar"
 
 const userProfile = props => {
@@ -14,9 +14,9 @@ const userProfile = props => {
   }, [])
 
   return(
-    <div className="grid-y profile">
-      <ProfileBar name={user.email}/>
+    <div className="grid-x profile">
       <ProfileSideBar/>
+      <SearchBar/>
     </div>
   )
 }

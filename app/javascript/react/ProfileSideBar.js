@@ -5,7 +5,6 @@ import FriendRequestsList from "./FriendRequestsList"
 const ProfileSideBar = (props) => {
   return(
     <div className="profileSideBar">
-      <h4>friends</h4>
       <FriendsList/>
       <FriendRequestsList/>
     </div>

@@ -1,9 +1,6 @@
 import { fetchUser } from "./UserFetches"
-import { useDispatch } from "react-redux"
 import { setState } from "../reducers/UserInfoSlice"
 import { setCurrentUserState } from "../reducers/CurrentUserInfoSlice"
-import { setCurrentUserFriendships } from "../reducers/CurrentUserFriendSlice"
-import { setCurrentUserFriendRequests } from "../reducers/CurrentUserFriendRequestSlice"
 import { setFriendships } from "../reducers/UserFriendSlice"
 import { setFriendRequests } from "../reducers/UserFriendRequestSlice"
 
@@ -18,8 +15,6 @@ const RootFetch = async(id, dispatch) => {
   dispatch(setFriendships(user1.friends))
   dispatch(setFriendRequests(user1.friend_requests))
   dispatch(setCurrentUserState(currentUser1Info))
-  dispatch(setCurrentUserFriendships(currentUser1.friends))
-  dispatch(setCurrentUserFriendRequests(currentUser1.friend_requests))
 }
 
 export default RootFetch

@@ -8,6 +8,7 @@ const Home = (props) => {
 
   const dispatch = useDispatch()
   const user = useSelector(selectCurrentUser)
+  debugger
 
   const fetchCurrentUser = async() => {
     const response = await currentUser()

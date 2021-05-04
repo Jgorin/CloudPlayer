@@ -19,7 +19,7 @@ const CurrentUserInfoSlice = createSlice({
   }
 })
 
-export const selectCurrentUser = (state) => {return state.currentUser.info}
+export const selectCurrentUser = (state) => {return state.currentUser}
 
 export const { setCurrentUserId, setCurrentUserEmail, setCurrentUserState } = CurrentUserInfoSlice.actions 
 export default CurrentUserInfoSlice.reducer

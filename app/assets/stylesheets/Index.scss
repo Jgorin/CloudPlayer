@@ -1,12 +1,16 @@
 @import "Colors.scss";
 
 .search-bar{
-  background-color: $light-gray;
-  height: 45px;
+  text-align: center;
 }
 
 .background{
-  background: linear-gradient(-5deg, rgb(29, 29, 29) 0%, rgb(68, 102, 84) 30%, rgb(158, 107, 102) 100%);
+  //background: linear-gradient(-5deg, rgb(29, 29, 29) 0%, rgb(88, 131, 108) 30%, rgb(175, 117, 113) 80%);
+  background-color: $light-color;
+}
+
+.background2{
+  background: $light-color;
 }
 
 .indexScreen{
@@ -26,19 +30,19 @@
 
 .profile{
   a{
-    color: rgb(189, 189, 189);
+    color: black;
   }
   a:hover{
-    color: $dark-green;
+    color: black;
   }
   h1{
-    color: $medium-green;
+    color: black;
   }
   h4{
-    color: rgb(241, 241, 241);
+    color: black;
   }
   label{
-    color: white;
+    color: black;
   }
   .searchValues{
     a{
@@ -46,13 +50,9 @@
     }
     position: absolute;
   }
-  background-color: $medium-gray;
-  margin: auto;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  width: 98%;
-  height: 90%;
-  border-radius: 15px;
+  background-color: $light-color;
+  width: 100%;
+  height: 100%;
 }
 
 .centered{
@@ -63,4 +63,10 @@
 
 .overflow{
   z-index: -50000;
+}
+
+.searchBar{
+  text-align: center;
+  float:left;
+  width: 70%;
 }
