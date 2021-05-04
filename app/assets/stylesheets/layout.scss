@@ -1,5 +1,10 @@
 @import "Colors.scss";
 
+html, body{
+  margin: 0px;
+  height: 100%;
+}
+
 .small_text{
   font-size: 12px;
 }
@@ -32,6 +37,15 @@
   background: $dark-gray;
   padding: 15px;
   white-space: nowrap;
+  p{
+    transition: transform 250ms;
+  }
+  p:hover{
+    transform: scale(1.035);
+  }
+  a:hover{
+    color: white;
+  }
 }
 
 .transparent{
@@ -44,7 +58,7 @@
 
 .red-background{
   padding: 11px;
-  border-radius: 45px;
+  border-radius: 11px;
   background-color: $light-red;
 }
 
@@ -63,8 +77,27 @@
 .profileBar{
   align-content: center;
   margin: 0 auto;
+  background-color: $dark-gray;
+  width:100%;
+  z-index: 5000;
+  padding-left: 25px;
 }
 
 .align{
   display: inline;
+}
+
+.app{
+  height: 100%;
+}
+
+.profileSideBar{
+  // margin: 3%;
+  // margin-top: 10%;
+  width: 20%;
+  height: 585px;
+  padding: 25px;
+  padding-top: 25px;
+  overflow-y: auto;
+  background-color: $dark-gray;
 }

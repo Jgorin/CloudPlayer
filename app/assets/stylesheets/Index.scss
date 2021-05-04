@@ -6,7 +6,6 @@
 }
 
 .background{
-  background: rgb(2,0,36);
   background: linear-gradient(-5deg, rgb(29, 29, 29) 0%, rgb(68, 102, 84) 30%, rgb(158, 107, 102) 100%);
 }
 
@@ -25,8 +24,41 @@
   z-index: -5;  
 }
 
+.profile{
+  a{
+    color: rgb(189, 189, 189);
+  }
+  a:hover{
+    color: $dark-green;
+  }
+  h1{
+    color: $medium-green;
+  }
+  h4{
+    color: rgb(241, 241, 241);
+  }
+  label{
+    color: white;
+  }
+  .searchValues{
+    a{
+      color: black;
+    }
+  }
+  background-color: $medium-gray;
+  margin: auto;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 98%;
+  height: 585px;
+}
+
 .centered{
   text-align: center;
   top: 50%;
   left: 50%;
+}
+
+.overflow{
+  z-index: -50000;
 }
