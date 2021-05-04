@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setState, selectUser } from "./reducers/UserInfoSlice"
 import { setCurrentUserState, selectCurrentUser } from "./reducers/CurrentUserInfoSlice"
-import { setFriendships } from "./reducers/UserFriendSlice"
 import { fetchUser } from "./fetches/UserFetches"
-import { setCurrentUserFriendships } from "./reducers/CurrentUserFriendSlice"
 import FriendsList from "./FriendsList"
 
 const userProfile = props => {
@@ -20,8 +18,6 @@ const userProfile = props => {
     const currentUser1Info = {id: currentUser1.id, email: currentUser1.email}
     dispatch(setState(user1info))
     dispatch(setCurrentUserState(currentUser1Info))
-    dispatch(setFriendships(user1.friends))
-    dispatch(setCurrentUserFriendships(currentUser1.friends))
   }
 
   useEffect(() => {

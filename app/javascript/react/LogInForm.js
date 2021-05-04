@@ -12,7 +12,6 @@ const defaultState = {
 const LogInForm = props => {
   const [formState, setFormState] = useState(defaultState)
   const [user, setUser] = useState(null)
-  const [shouldRedirect, setShouldRedirect] = useState(false)
   const dispatch = useDispatch();
 
   const setState = () => {
@@ -30,12 +29,6 @@ const LogInForm = props => {
     event.preventDefault()
     const response = await login(formState)
     setUser(response.user)
-    setShouldRedirect(true)
-  }
-
-  if(shouldRedirect){
-    dispatch(setStatus("none"))
-    return <Redirect to={`/users/${user.id}`}/>
   }
 
   return(

@@ -13,7 +13,7 @@ const CurrentUserFriendSlice = createSlice({
       state.filter(friendship => friendship.id == action.payload.id)
     },
     setCurrentUserFriendships(state, action){
-      state = action.payload
+      return action.payload
     }
   }
 })
