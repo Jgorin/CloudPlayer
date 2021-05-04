@@ -3,7 +3,7 @@ class Api::V1::UsersController < ApiController
   def show
     user = User.find(params[:id])
     users = [user, current_user]
-    render json: users, each_serializer: UserSerializer
+    render json: users, each_serializer: UserShowSerializer
   end
 
   def search
