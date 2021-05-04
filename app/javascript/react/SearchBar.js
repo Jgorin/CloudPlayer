@@ -31,8 +31,16 @@ const SearchBar = (props) => {
     }
   }
 
+  const handleOnSubmit = (event) => {
+    event.preventDefault()
+    setState({
+      ...state,
+      ["query"]: ""
+    })
+  }
+
   return(
-    <form>
+    <form onSubmit={handleOnSubmit}>
       <label htmlFor="search">Search:</label>
       <input type="text" id="search" name="search" onChange={handleChange} value={state.query}/>
       <SearchResults results={state.results}/>
