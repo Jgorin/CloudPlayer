@@ -4,14 +4,12 @@ import { Provider } from 'react-redux'
 import { store } from "../Store"
 import userProfile from "../userProfile"
 import Home from "../Home"
-import TopBar from "../TopBar"
 import Background from "../Background"
 
 export const Router = (props) => {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <Route path="/" component={TopBar}/>
         <Route path="/" component={Background}/>
           <Switch>
             <Route exact path="/users/search"/>

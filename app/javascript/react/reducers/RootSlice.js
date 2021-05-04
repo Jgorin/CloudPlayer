@@ -1,5 +1,4 @@
 import { combineReducers } from "redux"
-import TopBarSlice from "./TopBarSlice"
 import UserInfoSlice from "./UserInfoSlice"
 import UserFriendSlice from "./UserFriendSlice"
 import UserFriendRequestSlice from "./UserFriendRequestSlice"
@@ -17,8 +16,7 @@ const RootSlice = combineReducers({
     info: CurrentUserInfoSlice,
     friends: CurrentUserFriendSlice,
     friendRequests: CurrentUserFriendRequestSlice
-  }),
-  topbar: TopBarSlice
+  })
 })
 
 export default RootSlice
