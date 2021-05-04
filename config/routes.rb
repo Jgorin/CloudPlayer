@@ -24,7 +24,7 @@ Rails.application.routes.draw do
             delete 'accept'
           end
         end
-        resources :friendships, only: [:destroy]
+        resources :friendships, only: [:index, :destroy]
       end
     end
   end

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, Redirect } from "react-router-dom"
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from "react-redux"
@@ -7,6 +7,7 @@ import { setStatus, selectStatus } from "./reducers/TopBarSlice"
 import SignUpForm from "./SignUpForm"
 import LogInForm from "./LogInForm"
 import { logout } from "./fetches/SessionFetches"
+import { setState } from "./reducers/UserInfoSlice"
 import RedirectOnLogout from "./RedirectOnLogout"
 
 Modal.setAppElement(document.getElementById("app"));
@@ -26,6 +27,7 @@ const customStyles = {
 };
 
 const TopBar = props => {
+  const [shouldRedirect, setShouldRedirect] = useState(false)
   let login = false
   let signIn = false
   const dispatch = useDispatch()
@@ -35,6 +37,7 @@ const TopBar = props => {
   const logoutWrapper = async() => {
     const response = await logout()
     dispatch(setCurrentUserState({id: null, email: ""}))
+    setShouldRedirect(true)
   }
   
   switch(status){
@@ -70,10 +73,14 @@ const TopBar = props => {
     
   }
 
+  const home = () => {
+    dispatch(setState(user))
+  }
+
   let button1 = <p><a onClick={toggleLoginStatus} className="white medium red-background">Log In</a></p>
   let button2 = <p><a onClick={toggleSignUpStatus} className="white medium red-background">Sign Up</a></p>
   if(user.id != null){
-    button1 = <p><Link to={`/users/${user.id}`} className="white medium red-background">home</Link></p>
+    button1 = <p><Link to={`/users/${user.id}`} className="white medium red-background" onClick={home}>Home</Link></p>
     button2 = <p><a className="white medium red-background" onClick={logoutWrapper}>Log Out</a></p>
   }
 
@@ -110,7 +117,7 @@ const TopBar = props => {
         </Modal>
       </div>
 
-      {/* <RedirectOnLogout/> */}
+      <RedirectOnLogout shouldRedirect={shouldRedirect} setShouldRedirect={setShouldRedirect}/>
     </div>
   )
 }
