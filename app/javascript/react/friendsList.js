@@ -1,18 +1,22 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { selectFriends } from "./reducers/UserFriendSlice"
+import { fetchUser } from "./fetches/UserFetches"
+import { setCurrentUserFriendships } from "./reducers/CurrentUserFriendSlice"
+import { setFriendships } from "./reducers/UserFriendSlice"
+
+
 
 const FriendsList = props => {
-    
+  const friends = useSelector(selectFriends)
 
   const friendsList = friends.map((friend) => {
     let text = friend.email
-    if(currentUserId !== null && friend.id === currentUserId.id){
-      text += " (you)"
-    }
 
-    const fetchProfileWrapper = () => {
-      fetchProfile(friend.id)
+    const fetchProfileWrapper = async() => {
+      const response = await fetchUser(friend.id)
+      debugger
     }
 
     return(

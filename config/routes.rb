@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resources :users, only: [:show] do
         collection do
           get 'search'
+          get 'logged_in_user'
         end
         resources :friend_requests, only: [:create, :destroy] do
           collection do

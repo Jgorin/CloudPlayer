@@ -11,4 +11,8 @@ class Api::V1::UsersController < ApiController
     users = User.where("email LIKE ? AND id != ?", "%#{searchValue}%", session[:current_user_id])
     render json: users
   end
+
+  def logged_in_user
+    render json: current_user
+  end
 end

@@ -16,4 +16,12 @@ class ApplicationController < ActionController::Base
     session[:current_user_id] = current_user.id
     user_path(current_user)
   end
+
+  def authenticate_user!
+    if user_signed_in?
+      super
+    else
+      redirect_to "/"
+    end
+  end
 end

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Redirect } from 'react-router-dom'
 import { useDispatch } from "react-redux"
-import { setStatus, setIsLoggedIn } from "./reducers/TopBarSlice"
+import { setStatus } from "./reducers/TopBarSlice"
 import { login } from "./fetches/SessionFetches"
 
 const defaultState = {
@@ -29,10 +29,8 @@ const LogInForm = props => {
   const handleFormSubmit = async(event) => {
     event.preventDefault()
     const response = await login(formState)
-    debugger
     setUser(response.user)
     setShouldRedirect(true)
-    dispatch(setIsLoggedIn(true))
   }
 
   if(shouldRedirect){
