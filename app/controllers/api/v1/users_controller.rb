@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApiController
-  
+
   def show
     user = User.find(params[:id])
     users = [user, current_user]
@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApiController
 
   def search
     query = params["query"]  
-    users = User.where("email LIKE ? AND id != ?", "%#{query}%", current_user)
+    users = User.limit(30).where("email LIKE ? AND id != ?", "#{query}%", current_user)
     render json: users
   end
 
