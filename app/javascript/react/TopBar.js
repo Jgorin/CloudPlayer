@@ -9,6 +9,7 @@ import LogInForm from "./LogInForm"
 import { logout } from "./fetches/SessionFetches"
 import { setState } from "./reducers/UserInfoSlice"
 import RedirectOnLogout from "./RedirectOnLogout"
+import RootFetch from "./fetches/RootFetch"
 
 Modal.setAppElement(document.getElementById("app"));
 
@@ -74,7 +75,7 @@ const TopBar = props => {
   }
 
   const home = () => {
-    dispatch(setState(user))
+    RootFetch(user.id, dispatch)
   }
 
   let button1 = <p><a onClick={toggleLoginStatus} className="white medium red-background">Log In</a></p>
