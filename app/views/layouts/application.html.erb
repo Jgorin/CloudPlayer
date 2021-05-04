@@ -8,6 +8,27 @@
 </head>
 <body>
 
+  <div class="Topbar grid-x">
+    <div class="cell small-8">
+      <a href="/"><h1 class="white large">CloudPlayer</h1><a>
+    </div>
+    <% if !current_user %>
+      <div class="cell small-2">
+        <p><%= link_to 'Sign In', new_user_session_path, class: "red-background white large"%><p>
+      </div>
+      <div class="cell small-2">
+        <p><%= link_to 'Sign Up', new_user_registration_path, class: "red-background white large"%><p>
+      </div>
+    <% else %>
+      <div class="cell small-2">
+        <p><%= link_to 'Home', user_path(current_user), class: "red-background white large"%><p>
+      </div>
+      <div class="cell small-2">
+        <p><%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "red-background white large"%><p>
+      </div>
+    <% end %>
+  </div>
+
   <%- flash.each do |key, value| -%>
     <div class="flash flash-<%= key %>">
       <%= value %>
