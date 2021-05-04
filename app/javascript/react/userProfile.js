@@ -1,10 +1,9 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { selectUser } from "./reducers/UserInfoSlice"
-import FriendsList from "./FriendsList"
-import FriendRequestsList from "./FriendRequestsList"
 import RootFetch from "./fetches/RootFetch"
 import ProfileBar from "./ProfileBar"
+import ProfileSideBar from "./ProfileSideBar"
 
 const userProfile = props => {
   const dispatch = useDispatch()
@@ -15,12 +14,9 @@ const userProfile = props => {
   }, [])
 
   return(
-    <div className="grid-y">
+    <div className="grid-y profile">
       <ProfileBar name={user.email}/>
-      <h4>friends:</h4>
-      <FriendsList/>
-      <h4>friend requests:</h4>
-      <FriendRequestsList/>
+      <ProfileSideBar/>
     </div>
   )
 }

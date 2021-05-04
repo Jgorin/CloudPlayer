@@ -26,7 +26,7 @@ const Home = (props) => {
   }
   
   return(
-    <div className="background fullscreen">
+    <div>
       <div className="indexScreen">
         {greeting}
       </div>

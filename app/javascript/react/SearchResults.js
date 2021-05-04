@@ -5,12 +5,12 @@ const SearchResults = (props) => {
   const { results } = props
 
   let resultsList
-  let className = ""
+  let className = "searchValues"
   if(results.length > 0){
-    className += "callout"
+    className += " callout"
     resultsList = results.map((result)=>{
       return(
-        <li key={result.id} className="indent">
+        <li key={result.id} className="indent overflow">
           <UserProfileLink user={result}/>
         </li>
       )

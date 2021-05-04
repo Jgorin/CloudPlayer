@@ -88,7 +88,7 @@ const TopBar = props => {
   return(
     <div className="Topbar grid-x">
       <div className="cell small-10">
-        <Link to="/"><p className="white large">CloudPlayer</p></Link>
+        <Link to="/"><h1 className="white large">CloudPlayer</h1></Link>
       </div>
       <div className="cell small-1">
         {button1}
