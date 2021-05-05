@@ -4,6 +4,7 @@ import FriendRequestsList from "./FriendRequestsList"
 import SearchBar from "./SearchBar"
 
 const ProfileSideBar = (props) => {
+
   return(
     <div className="profileSideBar">
       <SearchBar/>

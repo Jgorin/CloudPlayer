@@ -1,20 +1,16 @@
 import React from "react"
-import UserProfileLink from "./UserProfileLink"
-import FriendButton from "./FriendButton.js"
+import UserSearchTile from "./UserSearchTile"
 
 const SearchResults = (props) => {
   const { results } = props
 
   let resultsList
-  let className = "searchValues"
+  let className = "searchValues rounded"
   if(results.length > 0){
     className += " callout"
     resultsList = results.map((result)=>{
       return(
-        <li key={result.id} className="indent">
-          <p>{result.email}</p>
-          <FriendButton otherUser={result.id}/>
-        </li>
+        <UserSearchTile key={result.id} result={result}/>
       )
     })
   }

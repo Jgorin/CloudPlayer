@@ -101,3 +101,14 @@ html, body{
   overflow-wrap: break-word;
 }
 
+.grey{
+  background-color: rgb(182, 182, 182);
+}
+
+.salmon{
+  background-color: $salmon;
+}
+
+.lightColor{
+  background-color: $light-color;
+}
