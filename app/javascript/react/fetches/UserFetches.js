@@ -1,8 +1,8 @@
 import { GET } from "./ApiFetch"
 import { POST } from "./Fetch"
 
-export const fetchUser = (userId) => {
-  return GET(`/users/${userId}`)
+export const fetchUser = () => {
+  return GET(`/users/home`)
 }
 
 export const postUser = (formPayload) => {

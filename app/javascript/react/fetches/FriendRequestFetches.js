@@ -1,13 +1,13 @@
 import { POST, DELETE } from "./ApiFetch"
 
-export const sendFriendRequest = (userId, currentUserId) => {
-  return POST(`/users/${currentUserId}/friend_requests`, {userId: userId})
+export const sendFriendRequest = (sender, receiver) => {
+  return POST(`/users/${sender}/friend_requests`, {receiver: receiver})
 }
 
-export const cancelFriendRequest = (userId, requestId) => {
-  return DELETE(`/users/${userId}/friend_requests/${requestId}`)
+export const cancelFriendRequest = (user, id) => {
+  return DELETE(`/users/${user}/friend_requests/${id}`)
 }
 
-export const acceptFriendRequest = (userId, requestId) => {
-  return DELETE(`/api/v1/users/${userId}/friend_requests/accept`, {requestId: requestId})
+export const acceptFriendRequest = (user, friendRequest) => {
+  return DELETE(`/users/${user}/friend_requests/accept`, {friend_request: friendRequest})
 }

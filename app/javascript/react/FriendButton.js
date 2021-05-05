@@ -1,40 +1,77 @@
 import React from "react"
-import { selectUser } from "./reducers/UserInfoSlice"
-import { selectFriends } from "./reducers/UserFriendSlice"
-import { selectCurrentUser } from "./reducers/CurrentUserInfoSlice"
 import { useDispatch, useSelector } from "react-redux"
-import { selectFriendRequests } from "./reducers/UserFriendRequestSlice"
+import { selectUser } from "./reducers/UserInfoSlice"
+import { addFriendship, selectFriendships } from "./reducers/UserFriendSlice"
+import { selectFriendRequests, addFriendRequest, deleteFriendRequest } from "./reducers/UserFriendRequestSlice"
+import { sendFriendRequest, cancelFriendRequest, acceptFriendRequest } from "./fetches/FriendRequestFetches"
+import { deleteFriendship as deleteFriend } from "./fetches/FriendshipFetches"
+import { deleteFriendship } from "./reducers/UserFriendSlice"
 
 const FriendButton = (props) => {
+  const { otherUser } = props
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
-  const currentUser = useSelector(selectCurrentUser)
   const friendRequests = useSelector(selectFriendRequests)
-  const friends = useSelector(selectFriends)
+  const friendships = useSelector(selectFriendships)
+
+  const sendFriendRequestWrapper = async() => {
+    const response = await sendFriendRequest(user.id, otherUser)
+    dispatch(addFriendRequest(response.friend_request))
+  }
+
+  const cancelFriendRequestWrapper = async() => {
+    const response = await cancelFriendRequest(otherUser, outgoingFriendRequestId)
+    dispatch(deleteFriendRequest(response.friend_request.id))
+  }
+
+  const acceptFriendRequestWrapper = async() => {
+    const response = await acceptFriendRequest(user.id, incomingFriendRequestId)
+    dispatch(addFriendship(response.friendship))
+    debugger
+    dispatch(deleteFriendRequest(incomingFriendRequestId))
+  }
+
+  const deleteFriendshipWrapper = async() => {
+    const response = await deleteFriend(user.id, friendshipId)
+    dispatch(deleteFriendship(response.friendship))
+  }
 
   let label
   let action
-  if(user.id != null && currentUser.id != null && user.id != currentUser.id){
-    if(friendRequests.some(request => request.sender.id == currentUser.id)){
-      //cancel friend request
-      label = "Cancel Friend Request"
-    }
-    else if(friendRequests.some(request => request.receiver.id == currentUser.id)){
-      //accept friend request
-      label = "Accept Friend Request"
-    }
-    else if(friends.some(friend => friend.id === currentUser.id)){
-      //delete friend
-      label = "Remove Friend"
-    }
-    else{
-      //send friend request
-      label = "Send Friend Request"
-    }
+  let outgoingFriendRequestId
+  let incomingFriendRequestId
+  let friendshipId
+
+  let friendship = friendships.find(friendship => friendship.friend.id === otherUser)
+  if(friendship === null){
+    friendship = friendships.find(friendship => friendship.user.id === otherUser)
+  }
+
+  let friendRequestIncoming = friendRequests.find(request => request.sender.id === otherUser)
+  let friendRequestOutgoing = friendRequests.find(request => request.receiver.id === otherUser)
+
+  if(friendship != null){
+    label = "Delete Friend"
+    action = deleteFriendshipWrapper
+    friendshipId = friendship.id
+  }
+  else if(friendRequestIncoming != null){
+    label = "Accept Friend Request"
+    action = acceptFriendRequestWrapper
+    incomingFriendRequestId = friendRequestIncoming.id
+  }
+  else if(friendRequestOutgoing != null){
+    label = "Cancel Friend Request"
+    action = cancelFriendRequestWrapper
+    outgoingFriendRequestId = friendRequestOutgoing.id
+  }
+  else{
+    label = "Send Friend Request"
+    action = sendFriendRequestWrapper
   }
 
   return(
-    <h4 className="friendButton">{label}</h4>
+    <p onClick={action}>{label}</p>
   )
 }
 

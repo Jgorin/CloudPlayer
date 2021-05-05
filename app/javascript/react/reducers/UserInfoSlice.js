@@ -12,14 +12,14 @@ const UserInfoSlice = createSlice({
     setEmail(state, action){
       state.email = action.payload
     },
-    setState(state, action){
+    setUser(state, action){
       state.id = action.payload.id
       state.email = action.payload.email
     }
   }
 })
 
-export const selectUser = (state) => {return state.user.info}
+export const selectUser = (state) => {return state.info}
 
-export const { setId, setEmail, setState } = UserInfoSlice.actions 
+export const { setId, setEmail, setUser } = UserInfoSlice.actions 
 export default UserInfoSlice.reducer

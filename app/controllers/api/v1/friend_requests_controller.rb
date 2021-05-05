@@ -1,31 +1,32 @@
 class Api::V1::FriendRequestsController < ApiController
 
   def create
-    find_users(params[:user_id], params[:current_user])
+    @receiver = User.find(params[:receiver])
+    @sender = User.find(params[:user_id])
     request = FriendRequest.new(sender: @sender, receiver: @receiver)
     if request.save
-      render_changes
+      render json: request
     else
       render_errors
     end
   end
 
   def destroy
-    find_users(params[:user_id], params[:id])
-    request = FriendRequest.where(sender: @sender, receiver: @receiver).first
-    if FriendRequest.destroy(request.id)
-      render_changes
+    friend_request = FriendRequest.find(params[:id])
+    if FriendRequest.destroy(params[:id])
+      render json: friend_request
     else
       render_not_found
     end
   end
 
   def accept
-    find_users(params[:current_user], params[:user_id])
-    request = FriendRequest.where(sender: @sender, receiver: @receiver).first
-    friendship = Friendship.new(user: @sender, friend: @receiver)
+    request = FriendRequest.find(params[:friend_request])
+    friend = request.sender
+    user = request.receiver
+    friendship = Friendship.new(user: user, friend: friend)
     if FriendRequest.destroy(request.id) && friendship.save
-      render json: {currentUser: @receiver, user: @sender}
+      render json: friendship
     else
       render_not_found
     end
