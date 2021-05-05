@@ -1,5 +1,5 @@
 class UserShowSerializer < ActiveModel::Serializer
-  attributes :id, :email, :friends, :friend_requests
-  has_many :friends, foreign_key: "friend_id", through: :friendships
+  attributes :id, :email, :friend_requests, :friendships
   has_many :friend_requests
+  has_many :friendships
 end

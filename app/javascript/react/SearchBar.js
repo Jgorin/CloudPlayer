@@ -41,14 +41,10 @@ const SearchBar = (props) => {
 
   return(
     <div className="searchBar text-center">
-      <form onSubmit={handleOnSubmit} className="grid-x">
-        <div className="cell small-3">
-          <label htmlFor="search" className="text-left">Search:</label>
-        </div>
-        <div className="cell small-9">
+      <form onSubmit={handleOnSubmit}>
+        <label htmlFor="search" className="text-left">Search:</label>
         <input type="text" id="search" name="search" onChange={handleChange} value={state.query} className="rounded"/>
         <SearchResults results={state.results}/>
-        </div>
       </form>
     </div>
   )

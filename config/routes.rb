@@ -14,10 +14,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:show] do
+      resources :users do
         collection do
           get 'search'
-          get 'logged_in_user'
+          get 'home'
         end
         resources :friend_requests, only: [:create, :destroy] do
           collection do

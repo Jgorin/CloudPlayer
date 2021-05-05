@@ -10,7 +10,7 @@ const UserFriendSlice = createSlice({
       state.push(action.payload)
     },
     deleteFriendship(state, action){
-      state.filter(friendship => friendship.id == action.payload.id)
+      return state.filter(friendship => friendship.id !== action.payload.id)
     },
     setFriendships(state, action){
       return action.payload
@@ -18,7 +18,7 @@ const UserFriendSlice = createSlice({
   }
 })
 
-export const selectFriends = (state) => {return state.user.friends}
+export const selectFriendships = (state) => {return state.friendships}
 
 export const { addFriendship, deleteFriendship, setFriendships } = UserFriendSlice.actions
 export default UserFriendSlice.reducer

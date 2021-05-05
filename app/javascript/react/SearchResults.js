@@ -1,5 +1,6 @@
 import React from "react"
 import UserProfileLink from "./UserProfileLink"
+import FriendButton from "./FriendButton.js"
 
 const SearchResults = (props) => {
   const { results } = props
@@ -10,8 +11,9 @@ const SearchResults = (props) => {
     className += " callout"
     resultsList = results.map((result)=>{
       return(
-        <li key={result.id} className="indent overflow">
-          <UserProfileLink user={result}/>
+        <li key={result.id} className="indent">
+          <p>{result.email}</p>
+          <FriendButton otherUser={result.id}/>
         </li>
       )
     })

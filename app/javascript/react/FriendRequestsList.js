@@ -1,31 +1,33 @@
-import React from "react"
+import React, { useState } from "react"
 import { useSelector } from "react-redux"
 import { selectFriendRequests } from "./reducers/UserFriendRequestSlice"
 import { selectUser } from "./reducers/UserInfoSlice"
-import { selectCurrentUser } from "./reducers/CurrentUserInfoSlice"
-import UserProfileLink from "./UserProfileLink"
 
 const FriendRequestsList = (props) => {
+  const[isOpen, setIsOpen] = useState(false)
   const friendRequests = useSelector(selectFriendRequests)
   const user = useSelector(selectUser)
-  const currentUser = useSelector(selectCurrentUser)
+
+  const toggleOpen = () => {
+    setIsOpen(!isOpen)
+  }
 
   let requestList
-  let requestLabel
-  if(currentUser.id == user.id){
+  if(isOpen){
     requestList = friendRequests.map((request) => {
       if(request.sender.id != user.id){
         return(
-          <UserProfileLink key={user.id} user={request.sender}/>
+          <li key={request.sender.id}>
+            <p>{request.sender.email}</p>
+          </li>
         )
       }
     })
-    requestLabel = <h4>friend requests</h4>
   }
 
   return(
     <div>
-      {requestLabel}
+      <a><h4 onClick={toggleOpen}>Friend Requests</h4></a>
       <ul>
         {requestList}
       </ul>
