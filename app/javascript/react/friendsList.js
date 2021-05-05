@@ -8,7 +8,7 @@ const FriendsList = props => {
   const dispatch = useDispatch()
   const friendships = useSelector(selectFriendships)
   const user = useSelector(selectUser)
-  const [ show, setShow ] = useState(false)
+  const [ show, setShow ] = useState(true)
 
   let friendsList
   if(show){

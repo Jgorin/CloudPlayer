@@ -4,7 +4,7 @@ import { selectFriendRequests } from "./reducers/UserFriendRequestSlice"
 import { selectUser } from "./reducers/UserInfoSlice"
 
 const FriendRequestsList = (props) => {
-  const[isOpen, setIsOpen] = useState(false)
+  const[isOpen, setIsOpen] = useState(true)
   const friendRequests = useSelector(selectFriendRequests)
   const user = useSelector(selectUser)
 

@@ -27,7 +27,6 @@ const FriendButton = (props) => {
   const acceptFriendRequestWrapper = async() => {
     const response = await acceptFriendRequest(user.id, incomingFriendRequestId)
     dispatch(addFriendship(response.friendship))
-    debugger
     dispatch(deleteFriendRequest(incomingFriendRequestId))
   }
 
@@ -41,6 +40,7 @@ const FriendButton = (props) => {
   let outgoingFriendRequestId
   let incomingFriendRequestId
   let friendshipId
+  let className = "friendButton"
 
   let friendship = friendships.find(friendship => friendship.friend.id === otherUser)
   if(friendship === null){
@@ -54,16 +54,19 @@ const FriendButton = (props) => {
     label = "Delete Friend"
     action = deleteFriendshipWrapper
     friendshipId = friendship.id
+    className += " salmon"
   }
   else if(friendRequestIncoming != null){
     label = "Accept Friend Request"
     action = acceptFriendRequestWrapper
     incomingFriendRequestId = friendRequestIncoming.id
+    className += " lightColor"
   }
   else if(friendRequestOutgoing != null){
     label = "Cancel Friend Request"
     action = cancelFriendRequestWrapper
     outgoingFriendRequestId = friendRequestOutgoing.id
+    className += " grey"
   }
   else{
     label = "Send Friend Request"
@@ -71,7 +74,7 @@ const FriendButton = (props) => {
   }
 
   return(
-    <p onClick={action}>{label}</p>
+    <a><p onClick={action} className={className}>{label}</p></a>
   )
 }
 

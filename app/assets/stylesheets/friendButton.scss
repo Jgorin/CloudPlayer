@@ -9,9 +9,13 @@
 }
 
 .friendButton{
+  transition: transform 250ms;
   border-radius: 10px;
-  background-color: $salmon;
+  background-color: $light-blue;
   float:left;
+}
+.friendButton:hover{
+  transform: scale(1.035);
 }
 
 .centered{
