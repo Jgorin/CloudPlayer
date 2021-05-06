@@ -8,35 +8,28 @@ const FriendsList = props => {
   const dispatch = useDispatch()
   const friendships = useSelector(selectFriendships)
   const user = useSelector(selectUser)
-  const [ show, setShow ] = useState(true)
 
   let friendsList
-  if(show){
-    friendsList = friendships.map((friendship) => {
-      
-      let friend
-      if(friendship.user.id === user.id){
-        friend = friendship.friend
-      }
-      else{
-        friend = friendship.user
-      }
+  friendsList = friendships.map((friendship) => {
+    
+    let friend
+    if(friendship.user.id === user.id){
+      friend = friendship.friend
+    }
+    else{
+      friend = friendship.user
+    }
 
-      return(
-        <li key={friend.id}>
-          <p>{friend.email}</p>
-        </li>
-      )
-    })
-  }
-
-  const toggleShow = () => {
-    setShow(!show)
-  }
+    return(
+      <li key={friend.id}>
+        <p>{friend.email}</p>
+      </li>
+    )
+  })
 
   return(
     <div>
-      <a><h4 onClick={toggleShow}>Friends</h4></a>
+      <h4 className="underlined">Friends</h4>
       <ul>
         {friendsList}
       </ul>

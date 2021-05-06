@@ -84,17 +84,19 @@ html, body{
   height: 100%;
 }
 
-.profileSideBar{
+.profile-left{
   // margin: 3%;
   // margin-top: 10%;
-  width: 16%;
-  height: 585px;
+  width: 50%;
+  height: 100%;
   padding: 25px;
-  padding-top: 25px;
   overflow: auto;
-  background-color: $medium-blue;
-  border-color: black;
-  border-width: 30px;
+  border-style: solid;
+  margin: 15px;
+  border-color: darken($light-color, 10%);
+  background-color: lighten($light-color, 1%);
+  border-width: 3px;
+  display: inline-block;
 }
 
 .wrap{
@@ -111,4 +113,13 @@ html, body{
 
 .lightColor{
   background-color: $light-color;
+}
+
+.overlap{
+  position: absolute;
+  z-index: 10000;
+}
+
+.userTopBar{
+  background-color: rgb(235, 235, 235);
 }
