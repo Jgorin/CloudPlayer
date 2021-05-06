@@ -13,8 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    session[:current_user_id] = current_user.id
-    "/users/home"
+    "/users/#{current_user.id}"
   end
 
   def authenticate_user!

@@ -18,7 +18,7 @@ const FriendRequestsList = (props) => {
       if(request.sender.id != user.id){
         return(
           <li key={request.sender.id}>
-            <p>{request.sender.email}</p>
+            <a><p>{request.sender.email}</p></a>
           </li>
         )
       }
@@ -27,7 +27,7 @@ const FriendRequestsList = (props) => {
 
   return(
     <div>
-      <a><h4 onClick={toggleOpen}>Friend Requests</h4></a>
+      <h4 className="underlined">Friend Requests</h4>
       <ul>
         {requestList}
       </ul>

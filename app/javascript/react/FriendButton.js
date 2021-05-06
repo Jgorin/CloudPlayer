@@ -43,7 +43,7 @@ const FriendButton = (props) => {
   let className = "friendButton"
 
   let friendship = friendships.find(friendship => friendship.friend.id === otherUser)
-  if(friendship === null){
+  if(friendship == null){
     friendship = friendships.find(friendship => friendship.user.id === otherUser)
   }
 

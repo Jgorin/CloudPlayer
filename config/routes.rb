@@ -1,23 +1,22 @@
 Rails.application.routes.draw do
 
-  root 'homes#home'
+  root 'homes#index'
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :homes, only: [:index]
 
-  resources :users, only: [:show]
-
-  resources :homes do
-    collection do
-      get "home"
-    end
-  end
+  get "/users/:id", to: "homes#index"
+  get "/users/:id/friends", to: "homes#index"
+  get "/users/:id/parties", to: "homes#index"
+  get "/users/:id/parties/new", to: "homes#index"
+  get "/users/:id/friend_requests", to: "homes#index"
+  get "/users/:id/party_invites", to: "homes#index"
 
   namespace :api do
     namespace :v1 do
-      resources :users do
+      resources :users, only: [:show] do
         collection do
           get 'search'
-          get 'home'
         end
         resources :friend_requests, only: [:create, :destroy] do
           collection do
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
           end
         end
         resources :friendships, only: [:destroy]
+        resources :parties, only: [:create]
       end
     end
   end

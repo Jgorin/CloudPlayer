@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { searchUsers } from "./fetches/UserFetches"
 import SearchResults from "./SearchResults"
 
@@ -40,10 +40,10 @@ const SearchBar = (props) => {
   }
 
   return(
-    <div className="searchBar text-center">
+    <div>
       <form onSubmit={handleOnSubmit} autoComplete="off">
-        <label htmlFor="search" className="text-left">Search:</label>
-        <input type="text" id="search" name="search" onChange={handleChange} value={state.query} className="rounded"/>
+        <label htmlFor="search" className="text-left">Search Users:</label>
+        <input type="text" id="search" name="search" onChange={handleChange} value={state.query} className="searchBar rounded"/>
         <SearchResults results={state.results}/>
       </form>
     </div>

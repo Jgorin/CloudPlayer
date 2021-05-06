@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :party_invites, foreign_key: "receiver_id"
+  has_many :party_memberships
+  has_many :parties, through: :party_memberships
   has_many :friendships
   has_many :friends, foreign_key: "friend_id", through: :friendships
   has_many :friend_requests, foreign_key: "receiver_id"
