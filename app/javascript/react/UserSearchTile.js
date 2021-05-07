@@ -3,10 +3,11 @@ import FriendButton from "./FriendButton"
 
 const UserSearchTile = (props) => {
   const { result } = props
+  
   return(
     <li key={result.id} className="grid-x callout rounded">
-      <p>{result.email}</p>
-      <FriendButton otherUser={result.id}/>
+      <p>{result.username}</p>
+      <FriendButton otherUserId={result.id}/>
     </li>
   )
 }

@@ -2,37 +2,42 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { selectUser } from "./reducers/UserInfoSlice"
 import { addFriendship, selectFriendships } from "./reducers/UserFriendSlice"
-import { selectFriendRequests, addFriendRequest, deleteFriendRequest } from "./reducers/UserFriendRequestSlice"
-import { sendFriendRequest, cancelFriendRequest, acceptFriendRequest } from "./fetches/FriendRequestFetches"
+import { selectFriendRequests, addFriendRequest, deleteFriendRequest as deleteFriendRequestState } from "./reducers/UserFriendRequestSlice"
+import { sendFriendRequest, deleteFriendRequest, acceptFriendRequest } from "./fetches/FriendRequestFetches"
 import { deleteFriendship as deleteFriend } from "./fetches/FriendshipFetches"
 import { deleteFriendship } from "./reducers/UserFriendSlice"
 
 const FriendButton = (props) => {
-  const { otherUser } = props
+  const { otherUserId } = props
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
   const friendRequests = useSelector(selectFriendRequests)
   const friendships = useSelector(selectFriendships)
 
   const sendFriendRequestWrapper = async() => {
-    const response = await sendFriendRequest(user.id, otherUser)
+    const response = await sendFriendRequest(user.id, otherUserId)
     dispatch(addFriendRequest(response.friend_request))
   }
 
   const cancelFriendRequestWrapper = async() => {
-    const response = await cancelFriendRequest(otherUser, outgoingFriendRequestId)
-    dispatch(deleteFriendRequest(response.friend_request.id))
+    const response = await deleteFriendRequest(otherUserId, outgoingFriendRequestId)
+    dispatch(deleteFriendRequestState(response.friend_request.id))
   }
 
   const acceptFriendRequestWrapper = async() => {
     const response = await acceptFriendRequest(user.id, incomingFriendRequestId)
     dispatch(addFriendship(response.friendship))
-    dispatch(deleteFriendRequest(incomingFriendRequestId))
+    dispatch(deleteFriendRequestState(incomingFriendRequestId))
   }
 
   const deleteFriendshipWrapper = async() => {
     const response = await deleteFriend(user.id, friendshipId)
     dispatch(deleteFriendship(response.friendship))
+  }
+
+  const deleteFriendRequestWrapper = async() => {
+    const response = await deleteFriendRequest(otherUserId, incomingFriendRequestId)
+    dispatch(deleteFriendRequestState(response.friend_request.id))
   }
 
   let label
@@ -41,14 +46,15 @@ const FriendButton = (props) => {
   let incomingFriendRequestId
   let friendshipId
   let className = "friendButton"
+  let declineButton
 
-  let friendship = friendships.find(friendship => friendship.friend.id === otherUser)
+  let friendship = friendships.find(friendship => friendship.friend.id == otherUserId)
   if(friendship == null){
-    friendship = friendships.find(friendship => friendship.user.id === otherUser)
+    friendship = friendships.find(friendship => friendship.user.id == otherUserId)
   }
 
-  let friendRequestIncoming = friendRequests.find(request => request.sender.id === otherUser)
-  let friendRequestOutgoing = friendRequests.find(request => request.receiver.id === otherUser)
+  const friendRequestIncoming = friendRequests.find(request => request.sender.id == otherUserId)
+  const friendRequestOutgoing = friendRequests.find(request => request.receiver.id == otherUserId)
 
   if(friendship != null){
     label = "Delete Friend"
@@ -61,6 +67,7 @@ const FriendButton = (props) => {
     action = acceptFriendRequestWrapper
     incomingFriendRequestId = friendRequestIncoming.id
     className += " lightColor"
+    declineButton = <p className="friendButton salmon" onClick={deleteFriendRequestWrapper}>Decline Friend Request</p>
   }
   else if(friendRequestOutgoing != null){
     label = "Cancel Friend Request"
@@ -74,7 +81,10 @@ const FriendButton = (props) => {
   }
 
   return(
-    <a><p onClick={action} className={className}>{label}</p></a>
+    <div>
+     <p onClick={action} className={className}>{label}</p>
+     {declineButton}
+    </div>
   )
 }
 

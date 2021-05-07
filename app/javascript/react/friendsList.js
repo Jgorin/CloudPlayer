@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { selectFriendships } from "./reducers/UserFriendSlice"
 import { selectUser } from "./reducers/UserInfoSlice"
+import FriendButton from "./FriendButton"
 
 
 const FriendsList = props => {
@@ -21,8 +22,9 @@ const FriendsList = props => {
     }
 
     return(
-      <li key={friend.id}>
-        <p>{friend.email}</p>
+      <li key={friend.id} className="grid-x">
+        <p>{friend.username}</p>
+        <FriendButton otherUserId={friend.id}/>
       </li>
     )
   })
