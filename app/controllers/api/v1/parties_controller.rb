@@ -1,9 +1,10 @@
 class Api::V1::PartiesController < ApiController
   def create
     user = User.find(params[:user_id])
+    partyTitle = params[:title]
     invitedIds = params[:invites]
     if user
-      party = Party.new()
+      party = Party.new(title: partyTitle)
       if !party.save
         render_errors(party)
       end

@@ -29,7 +29,7 @@ const FriendRequestsList = (props) => {
 
   return(
     <div>
-      <h4 className="underlined">Friend Requests</h4>
+      <h2 className="underlined">Friend Requests</h2>
       <ul>
         {requestList}
       </ul>

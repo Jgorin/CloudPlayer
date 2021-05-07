@@ -23,7 +23,7 @@ const FriendsList = props => {
 
     return(
       <li key={friend.id} className="grid-x">
-        <p>{friend.username}</p>
+        <h4>{friend.username}</h4>
         <FriendButton otherUserId={friend.id}/>
       </li>
     )
@@ -31,7 +31,7 @@ const FriendsList = props => {
 
   return(
     <div>
-      <h4 className="underlined">Friends</h4>
+      <h2 className="underlined">Friends</h2>
       <ul>
         {friendsList}
       </ul>

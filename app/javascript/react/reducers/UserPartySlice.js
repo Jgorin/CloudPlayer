@@ -9,11 +9,13 @@ const UserPartySlice = createSlice({
     addParty(state, action){
       state.push(action.payload)
     },
-    setParties(action){
+    setParties(state, action){
       return action.payload
     }
   }
 })
+
+export const selectParties = (state) => { return state.parties }
 
 export const { addParty, setParties } = UserPartySlice.actions
 export default UserPartySlice.reducer
