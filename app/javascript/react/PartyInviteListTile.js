@@ -12,7 +12,7 @@ const PartyInviteListTile = (props) => {
   return(
     <div>
       <div className="callout rounded">
-        <a onClick={handleClick}><p>{props.user.email}</p></a>
+        <a onClick={handleClick}><p>{props.user.username}</p></a>
       </div>
     </div>
   )

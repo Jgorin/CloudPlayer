@@ -19,7 +19,7 @@ const NewInviteSearchBarResults = (props) => {
 
     return(
       <li key={result.id}>
-        <a onClick={handleClick}>{result.email}</a>
+        <a onClick={handleClick}>{result.username}</a>
       </li>
     )
   })

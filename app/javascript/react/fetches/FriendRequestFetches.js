@@ -4,7 +4,7 @@ export const sendFriendRequest = (sender, receiver) => {
   return POST(`/users/${sender}/friend_requests`, {receiver: receiver})
 }
 
-export const cancelFriendRequest = (user, id) => {
+export const deleteFriendRequest = (user, id) => {
   return DELETE(`/users/${user}/friend_requests/${id}`)
 }
 

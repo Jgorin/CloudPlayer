@@ -10,10 +10,6 @@ const initialState = {
 const SearchBar = (props) => {
   const [state, setState] = useState(initialState)
 
-  const searchUserWrapper = async() => {
-    const response = await searchUsers(state.query)
-  }
-
   const handleChange = async(event) => {
     const query = event.currentTarget.value
     if(query == ""){

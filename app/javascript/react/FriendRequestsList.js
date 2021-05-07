@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useSelector } from "react-redux"
 import { selectFriendRequests } from "./reducers/UserFriendRequestSlice"
 import { selectUser } from "./reducers/UserInfoSlice"
+import FriendButton from "./FriendButton"
 
 const FriendRequestsList = (props) => {
   const[isOpen, setIsOpen] = useState(true)
@@ -18,7 +19,8 @@ const FriendRequestsList = (props) => {
       if(request.sender.id != user.id){
         return(
           <li key={request.sender.id}>
-            <a><p>{request.sender.email}</p></a>
+            <p>{request.sender.username}</p>
+            <FriendButton otherUserId={request.sender.id}/>
           </li>
         )
       }
