@@ -8,8 +8,9 @@ import { setParties } from "../reducers/UserPartySlice"
 
 const RootFetch = async(dispatch) => {
   const parsedResponse = await fetchUser()
+  debugger
   const user = parsedResponse.user
-  const info = {id: user.id, email: user.email, username: user.username}
+  const info = {id: user.id, email: user.email, username: user.username, profilePhoto: user.profile_photo}
   dispatch(setUser(info))
   dispatch(setFriendships(user.friendships))
   dispatch(setFriendRequests(user.friend_requests))

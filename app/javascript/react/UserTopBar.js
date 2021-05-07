@@ -23,6 +23,11 @@ const UserTopBar = (props) => {
   if(partyInvitesLength > 0){
     partyInvitesLabel += ` (${partyInvitesLength})`
   }
+  debugger
+  let profilePhoto
+  if(user.profilePhoto){
+    profilePhoto = <img src={user.profilePhoto.url} className="profile-photo"/>
+  }
 
 
   useEffect(() => {
@@ -31,6 +36,7 @@ const UserTopBar = (props) => {
 
   return(
     <div className="userTopBar menu">
+      {profilePhoto}
       <h2>{user.username}</h2>
       <Link to={`/users/${user.id}/friends`}>Friends</Link>
       <Link to={`/users/${user.id}/friend_requests`}>{friendRequestLabel}</Link>
