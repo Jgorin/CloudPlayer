@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { selectFriendships } from "./reducers/UserFriendSlice"
 import { selectUser } from "./reducers/UserInfoSlice"
 import FriendButton from "./FriendButton"
+import UserProfilePhoto from "./UserProfilePhoto"
 
 
 const FriendsList = props => {
@@ -23,6 +24,7 @@ const FriendsList = props => {
 
     return(
       <li key={friend.id} className="grid-x">
+        <UserProfilePhoto user={friend}/>
         <h4>{friend.username}</h4>
         <FriendButton otherUserId={friend.id}/>
       </li>

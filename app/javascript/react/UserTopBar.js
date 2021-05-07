@@ -6,6 +6,7 @@ import { selectFriendRequests } from "./reducers/UserFriendRequestSlice"
 import { selectPartyInvites } from "./reducers/UserPartyInviteSlice"
 import SearchBar from "./SearchBar"
 import RootFetch from "./fetches/RootFetch"
+import UserProfilePhoto from "./UserProfilePhoto"
 
 const UserTopBar = (props) => {
   const dispatch = useDispatch()
@@ -23,12 +24,6 @@ const UserTopBar = (props) => {
   if(partyInvitesLength > 0){
     partyInvitesLabel += ` (${partyInvitesLength})`
   }
-  debugger
-  let profilePhoto
-  if(user.profilePhoto){
-    profilePhoto = <img src={user.profilePhoto.url} className="profile-photo"/>
-  }
-
 
   useEffect(() => {
     RootFetch(dispatch)
@@ -36,7 +31,7 @@ const UserTopBar = (props) => {
 
   return(
     <div className="userTopBar menu">
-      {profilePhoto}
+      <UserProfilePhoto user={user}/>
       <h2>{user.username}</h2>
       <Link to={`/users/${user.id}/friends`}>Friends</Link>
       <Link to={`/users/${user.id}/friend_requests`}>{friendRequestLabel}</Link>

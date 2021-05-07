@@ -5,6 +5,7 @@ import { addParty } from "./reducers/UserPartySlice"
 import { selectUser } from "./reducers/UserInfoSlice"
 import { acceptPartyInvite, declinePartyInvite } from "./fetches/PartyInviteFetches"
 import { removeInvite } from "./reducers/UserPartyInviteSlice"
+import UserProfilePhoto from "./UserProfilePhoto"
 
 const PartyInvitesList = (props) => {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ const PartyInvitesList = (props) => {
 
     return(
       <li key={invite.id}>
+        <UserProfilePhoto user={invite.sender}/>
         <h4>{`${invite.party.title} - from ${invite.sender.email}`}</h4>
         <a className="button" onClick={acceptPartyInviteWrapper}>Accept</a>
         <a className="button" onClick={declinePartyInviteWrapper}>Decline</a>

@@ -1,6 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addUser, removeUser } from "./reducers/InvitationFormSlice"
+import UserProfilePhoto from "./UserProfilePhoto"
 
 const NewInviteSearchBarResults = (props) => {
   const { state, setState } = props
@@ -11,15 +12,24 @@ const NewInviteSearchBarResults = (props) => {
   const resultsList = results.map((result) => {
     const handleClick = (event) => {
       dispatch(addUser(result))
-      setState({
-        ...state,
-        ["results"]: results.filter(oldResult => oldResult.id != result.id)
-      })
+      if(results.length > 1){
+        setState({
+          ...state,
+          ["results"]: results.filter(oldResult => oldResult.id != result.id)
+        })
+      }
+      else{
+        setState({
+          ["query"]: "",
+          ["results"]: []
+        })
+      }
     }
 
     return(
-      <li key={result.id}>
-        <a onClick={handleClick}>{result.username}</a>
+      <li key={result.id} onClick={handleClick}>
+        <UserProfilePhoto user={result}/>
+        <a>{result.username}</a>
       </li>
     )
   })

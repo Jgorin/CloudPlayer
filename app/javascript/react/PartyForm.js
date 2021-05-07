@@ -1,20 +1,21 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+import { Redirect } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import PartyInviteListTile from "./PartyInviteListTile"
-import { selectForm, setTitle } from "./reducers/InvitationFormSlice"
+import { selectForm, setTitle, setInvites } from "./reducers/InvitationFormSlice"
 import NewInviteSearchBar from "./NewInviteSearchBar"
-import {createParty} from "./fetches/PartyFetches"
+import { createParty } from "./fetches/PartyFetches"
+import { addParty } from "./reducers/UserPartySlice"
 import { selectUser } from "./reducers/UserInfoSlice"
 
 const PartyForm = (props) => {
-  // const invitationList = useSelector(selectInvitations)
+  const[shouldRedirect, setShouldRedirect] = useState(false)
   const dispatch = useDispatch()
   const form = useSelector(selectForm)
   const user = useSelector(selectUser)
   const invitationList = form.invites
   const title = form.title
   
-
   let tiles = []
   for(let i = 0; i < invitationList.length; i++){
     let component = <PartyInviteListTile key={i} user={invitationList[i]} id={i}/>
@@ -27,12 +28,20 @@ const PartyForm = (props) => {
     })
     const response = await createParty(user.id, title, invitedIds)
     debugger
+    dispatch(addParty(response.party))
+    dispatch(setTitle(""))
+    dispatch(setInvites([]))
+    setShouldRedirect(true)
   }
 
-  const handleTitleChange = async(event) => {
+  const handleTitleChange = (event) => {
     dispatch(setTitle(event.currentTarget.value))
   }
-  
+
+  if(shouldRedirect){
+    return <Redirect to={`/users/${user.id}/parties`}/>
+  }
+
   return(
     <div className="partyForm">
       <h2 className="centered">Create a new Party</h2>
