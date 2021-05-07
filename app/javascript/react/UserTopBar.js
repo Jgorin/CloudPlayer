@@ -36,7 +36,7 @@ const UserTopBar = (props) => {
       <Link to={`/users/${user.id}/friend_requests`}>{friendRequestLabel}</Link>
       <Link to={`/users/${user.id}/party_invites`}>{partyInvitesLabel}</Link>
       <Link to={`/users/${user.id}/parties`}>Parties</Link>
-      <a className="searchBar"><SearchBar/></a>
+      <SearchBar/>
       <Link to={`/users/${user.id}/parties/new`} className="button large text-center">New Party</Link>
     </div>
   )

@@ -82,7 +82,7 @@ const FriendButton = (props) => {
 
   return(
     <div>
-     <p onClick={action} className={className}>{label}</p>
+     <a><p onClick={action} className={className}>{label}</p></a>
      {declineButton}
     </div>
   )

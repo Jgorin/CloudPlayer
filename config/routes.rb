@@ -25,6 +25,11 @@ Rails.application.routes.draw do
         end
         resources :friendships, only: [:destroy]
         resources :parties, only: [:create]
+        resources :party_invites, only: [:destroy] do
+          collection do
+            delete "accept"
+          end
+        end
       end
     end
   end
