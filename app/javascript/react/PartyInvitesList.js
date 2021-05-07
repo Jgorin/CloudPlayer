@@ -8,7 +8,7 @@ const PartyInvitesList = (props) => {
   
   const invitesList = partyInvites.map((invite) => {
     return(
-      <li>
+      <li key={invite.id}>
         <p>{`${invite.sender.email} invited you to join a party.`}</p>
       </li>
     )

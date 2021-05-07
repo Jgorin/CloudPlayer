@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { useSelector } from "react-redux"
 import PartyInviteListTile from "./PartyInviteListTile"
-import NewInviteTile from "./NewInviteTile"
 import { selectInvitations } from "./reducers/InvitationFormSlice"
 import NewInviteSearchBar from "./NewInviteSearchBar"
 import {createParty} from "./fetches/PartyFetches"
@@ -14,10 +13,6 @@ const PartyForm = (props) => {
   let tiles = []
   for(let i = 0; i < invitationList.length; i++){
     let component = <PartyInviteListTile key={i} user={invitationList[i]} id={i}/>
-    tiles.push(component)
-  }
-  if(tiles.length < 1){
-    let component = <NewInviteTile key={tiles.length} id={tiles.length}/>
     tiles.push(component)
   }
 
