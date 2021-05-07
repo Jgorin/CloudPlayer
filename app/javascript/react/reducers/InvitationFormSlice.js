@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   invites: [],
-  selectedTile: null
+  title: ""
 }
 
 const InvitationFormSlice = createSlice({
@@ -18,13 +18,14 @@ const InvitationFormSlice = createSlice({
         selectedTile: state.selectedTile
       }
     },
-    setUser(state, action){
-      state.invites[action.payload.index] = action.payload.value
+    setTitle(state, action){
+      state.title = action.payload
     }
   }
 })
 
 export const selectInvitations = (state) => { return state.invitationForm.invites }
+export const selectForm = (state) => { return state.invitationForm }
 
-export const { addUser, setUser, removeUser } = InvitationFormSlice.actions
+export const { addUser, removeUser, setTitle } = InvitationFormSlice.actions
 export default InvitationFormSlice.reducer
