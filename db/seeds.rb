@@ -2,7 +2,7 @@ user1 = User.create(email: "jmgorin1@gmail.com", username: "Josh1", password: "1
 user2 = User.create(email: "jgorin@conncoll.edu", username: "Josh2", password: "111111", password_confirmation: "111111")
 user3 = User.create(email: "jmgoin98@gmail.com", username: "Josh3", password: "111111", password_confirmation: "111111")
 
-for i in 1..100
+for i in 1..10
   User.create(email: "test#{i}@gmail.com", username: "test#{i}", password: "111111", password_confirmation: "111111")
 end
 

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = { id: null, email: "" }
+const initialState = { id: null, email: "", profilePhoto: null }
 
 const UserInfoSlice = createSlice({
   name: "user",
@@ -16,6 +16,7 @@ const UserInfoSlice = createSlice({
       state.id = action.payload.id
       state.email = action.payload.email
       state.username = action.payload.username
+      state.profilePhoto = action.payload.profilePhoto
     }
   }
 })
