@@ -5,6 +5,7 @@ import { addUser, removeUser } from "./reducers/InvitationFormSlice"
 const NewInviteSearchBarResults = (props) => {
   const { state, setState } = props
   const results = state.results
+
   const dispatch = useDispatch()
 
   const resultsList = results.map((result) => {
@@ -17,7 +18,7 @@ const NewInviteSearchBarResults = (props) => {
     }
 
     return(
-      <li>
+      <li key={result.id}>
         <a onClick={handleClick}>{result.email}</a>
       </li>
     )

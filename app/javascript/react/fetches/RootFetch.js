@@ -8,7 +8,6 @@ import { setParties } from "../reducers/UserPartySlice"
 
 const RootFetch = async(dispatch) => {
   const parsedResponse = await fetchUser()
-  debugger
   const user = parsedResponse.user
   const info = {id: user.id, email: user.email}
   dispatch(setUser(info))
