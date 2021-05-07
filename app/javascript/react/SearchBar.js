@@ -36,11 +36,13 @@ const SearchBar = (props) => {
   }
 
   return(
-    <div>
+    <div className="searchBar">
       <form onSubmit={handleOnSubmit} autoComplete="off">
         <label htmlFor="search" className="text-left">Search Users:</label>
-        <input type="text" id="search" name="search" onChange={handleChange} value={state.query} className="searchBar rounded"/>
-        <SearchResults results={state.results}/>
+        <input type="text" id="search" name="search" onChange={handleChange} value={state.query} className="rounded"/>
+        <div className="searchValues">
+          <SearchResults results={state.results}/>
+        </div>
       </form>
     </div>
   )

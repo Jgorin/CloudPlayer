@@ -9,6 +9,9 @@ const UserPartyInviteSlice = createSlice({
     addInvite(state, action){
       state.push(action.payload)
     },
+    removeInvite(state, action){
+      return state.filter(invite => invite.id != action.payload)
+    },
     setInvites(state, action){
       return action.payload
     }
@@ -17,5 +20,5 @@ const UserPartyInviteSlice = createSlice({
 
 export const selectPartyInvites = (state) => { return state.partyInvites }
 
-export const { addInvite, setInvites } = UserPartyInviteSlice.actions
+export const { addInvite, setInvites, removeInvite } = UserPartyInviteSlice.actions
 export default UserPartyInviteSlice.reducer
