@@ -1,4 +1,9 @@
 class Api::V1::PartiesController < ApiController
+
+  def show
+    render json: Party.find(params[:id])
+  end
+
   def create
     user = User.find(params[:user_id])
     partyTitle = params[:title]

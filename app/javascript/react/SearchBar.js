@@ -30,7 +30,7 @@ const SearchBar = (props) => {
   const handleOnSubmit = (event) => {
     event.preventDefault()
     setState({
-      ...state,
+      ["results"]: [],
       ["query"]: ""
     })
   }

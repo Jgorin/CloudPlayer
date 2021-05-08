@@ -30,9 +30,9 @@ const FriendRequestsList = (props) => {
   }
 
   return(
-    <div>
+    <div className="list">
       <h2 className="underlined">Friend Requests</h2>
-      <ul>
+      <ul className="list">
         {requestList}
       </ul>
     </div>

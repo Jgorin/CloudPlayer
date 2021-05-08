@@ -64,7 +64,7 @@ const searchFriends = (friendships, invitationList, query, userId) => {
     else{
       friend = friendship.friend
     }
-    if(friend.username.toLowerCase().includes(query.toLowerCase()) && !invitationList.includes(friend)){
+    if(friend.username.toLowerCase().startsWith(query.toLowerCase()) && !invitationList.includes(friend)){
       results.push(friend)
     }
   })

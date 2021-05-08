@@ -9,6 +9,7 @@ import PartyInvitesList from "../PartyInvitesList"
 import PartyForm from "../PartyForm"
 import UserTopBar from "../UserTopBar"
 import PartyList from "../PartyList"
+import PartyRoom from "../PartyRoom"
 
 export const Router = (props) => {
   return (
@@ -21,6 +22,7 @@ export const Router = (props) => {
           <Route exact path="/users/:id/party_invites" component={PartyInvitesList}/>
           <Route exact path="/users/:id/parties/new" component={PartyForm}/>
           <Route exact path="/users/:id/parties" component={PartyList}/>
+          <Route exact path="/parties/:id" component={PartyRoom}/>
           <Route path="/" component={Home}/>
         </Switch>
         </Provider>
