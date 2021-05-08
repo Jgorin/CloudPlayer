@@ -4,6 +4,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  devise :omniauthable, :omniauth_providers => [:spotify]
+
 
   has_many :party_invites, foreign_key: "receiver_id"
   has_many :party_memberships
@@ -11,6 +14,14 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :friends, foreign_key: "friend_id", through: :friendships
   has_many :friend_requests, foreign_key: "receiver_id"
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.username = auth.info.name
+    end      
+  end
 
   def friendships
     friendships_user = Friendship.where(user: self).to_ary
