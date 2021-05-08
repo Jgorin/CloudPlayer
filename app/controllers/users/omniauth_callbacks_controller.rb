@@ -5,6 +5,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # devise :omniauthable, omniauth_providers: [:twitter]
   def spotify
     @user = User.from_omniauth(request.env["omniauth.auth"])
+    session[:credentials] = request.env["omniauth.auth"].credentials
     sign_in_and_redirect @user  
   end
 

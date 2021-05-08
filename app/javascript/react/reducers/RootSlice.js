@@ -5,6 +5,8 @@ import UserFriendRequestSlice from "./UserFriendRequestSlice"
 import UserPartySlice from "./UserPartySlice"
 import UserPartyInviteSlice from "./UserPartyInviteSlice"
 import InvitationFormSlice from "./InvitationFormSlice"
+import PartyRoomInfoSlice from "./PartyRoomInfoSlice"
+import SongSearchFormSlice from "./SongSearchFormSlice"
 
 
 const RootSlice = combineReducers({
@@ -13,7 +15,9 @@ const RootSlice = combineReducers({
   friendRequests: UserFriendRequestSlice,
   partyInvites: UserPartyInviteSlice,
   parties: UserPartySlice,
-  invitationForm: InvitationFormSlice
+  invitationForm: InvitationFormSlice,
+  partyRoomInfo: PartyRoomInfoSlice,
+  songSearchForm: SongSearchFormSlice
 })
 
 export default RootSlice
