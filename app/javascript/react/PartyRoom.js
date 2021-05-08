@@ -5,7 +5,6 @@ const PartyRoom = (props) => {
 
   const fetchPartyWrapper = async() => {
     const response = await fetchParty(props.match.params.id)
-    debugger
   }
 
   useEffect(() => {

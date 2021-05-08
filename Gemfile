@@ -57,3 +57,6 @@ gem 'webpacker', '~> 3.3'
 gem "active_model_serializers"
 gem "carrierwave"
 gem "fog"
+gem 'omniauth', '~> 1.9.1'
+gem 'omniauth-spotify'
+gem "omniauth-rails_csrf_protection"

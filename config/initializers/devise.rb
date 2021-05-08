@@ -273,6 +273,16 @@ Devise.setup do |config|  config.secret_key = Rails.application.secret_key_base
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  def encode(args)
+    return URI.escape(args, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
+  end
+
+  require 'omniauth-spotify'
+  config.omniauth :spotify, ENV["SPOTIFY_CLIENT_ID"], ENV["SPOTIFY_SECRET"], scope: %w(
+    playlist-read-private
+    user-read-private
+    user-read-email
+  ).join(' ')
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -310,3 +320,4 @@ Devise.setup do |config|  config.secret_key = Rails.application.secret_key_base
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
 end
+
