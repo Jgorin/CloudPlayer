@@ -70,7 +70,7 @@
 
 .searchBar{
   text-align: center;
-  width: 35%;
+  width: 25%;
   margin-left: 25px;
   margin-right: 25px;
 }
@@ -97,4 +97,33 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
+}
+
+.list{
+  padding: 10px 25px;
+  margin: 0 auto;
+}
+
+.blue{
+  background-color: rgb(241, 241, 241) !important;
+}
+
+.light-color{
+  background-color: rgb(241, 241, 241) !important;
+}
+
+.selectable{
+  transition: transform 500ms;
+  color: rgb(66, 66, 66);
+}
+.selectable:hover{
+  transform: scale(1.04);
+  color: black;
+}
+
+.topbaritem{
+  border-left-style: solid;
+  border-right-style: solid;
+  border-color: black;
+  border-width: 2px;
 }

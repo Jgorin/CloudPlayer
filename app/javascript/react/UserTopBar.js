@@ -33,10 +33,10 @@ const UserTopBar = (props) => {
     <div className="userTopBar menu">
       <UserProfilePhoto user={user}/>
       <h2>{user.username}</h2>
-      <Link to={`/users/${user.id}/friends`}>Friends</Link>
-      <Link to={`/users/${user.id}/friend_requests`}>{friendRequestLabel}</Link>
-      <Link to={`/users/${user.id}/party_invites`}>{partyInvitesLabel}</Link>
-      <Link to={`/users/${user.id}/parties`}>Parties</Link>
+      <Link to={`/users/${user.id}/friends`} className="selectable"><h4>Friends</h4></Link>
+      <Link to={`/users/${user.id}/friend_requests`} className="selectable"><h4>{friendRequestLabel}</h4></Link>
+      <Link to={`/users/${user.id}/party_invites`} className="selectable"><h4>{partyInvitesLabel}</h4></Link>
+      <Link to={`/users/${user.id}/parties`} className="selectable"><h4>Parties</h4></Link>
       <SearchBar/>
       <Link to={`/users/${user.id}/parties/new`} className="button large text-center">New Party</Link>
     </div>

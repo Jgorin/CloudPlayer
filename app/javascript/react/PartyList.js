@@ -13,9 +13,9 @@ const PartyList = (props) => {
   })
 
   return(
-    <div>
+    <div className="list">
       <h2 className="underlined">Party List</h2>
-      <ul>
+      <ul className="list">
         {partyList}
       </ul>
     </div>

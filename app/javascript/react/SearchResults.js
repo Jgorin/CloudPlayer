@@ -5,7 +5,7 @@ const SearchResults = (props) => {
   const { results } = props
 
   let resultsList
-  let className = "rounded overflow"
+  let className = "rounded overflow light-color"
   if(results.length > 0){
     className += " callout"
     resultsList = results.map((result)=>{

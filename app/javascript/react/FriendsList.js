@@ -23,18 +23,22 @@ const FriendsList = props => {
     }
 
     return(
-      <li key={friend.id} className="grid-x">
-        <UserProfilePhoto user={friend}/>
-        <h4>{friend.username}</h4>
+      <li key={friend.id} className="grid-x grid-margin-x callout rounded blue">
+        <div className="cell small-1">
+          <UserProfilePhoto user={friend}/>
+        </div>
+        <div className="cell small-2">
+          <h2>{friend.username}</h2>
+        </div>
         <FriendButton otherUserId={friend.id}/>
       </li>
     )
   })
 
   return(
-    <div>
+    <div className="list">
       <h2 className="underlined">Friends</h2>
-      <ul>
+      <ul className="list">
         {friendsList}
       </ul>
     </div>

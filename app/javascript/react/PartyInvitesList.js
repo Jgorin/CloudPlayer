@@ -27,7 +27,7 @@ const PartyInvitesList = (props) => {
     }
 
     return(
-      <li key={invite.id}>
+      <li key={invite.id} className="list">
         <UserProfilePhoto user={invite.sender}/>
         <h4>{`${invite.party.title} - from ${invite.sender.email}`}</h4>
         <a className="button" onClick={acceptPartyInviteWrapper}>Accept</a>
@@ -37,9 +37,9 @@ const PartyInvitesList = (props) => {
   })
 
   return(
-    <div>
+    <div className="list">
       <h2 className="underlined">Party Invites</h2>
-      <ul>
+      <ul className="list">
         {invitesList}
       </ul>
     </div>
