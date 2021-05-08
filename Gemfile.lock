@@ -520,6 +520,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   factory_bot
+  faraday
   fog
   foundation-rails (~> 6.5)
   jbuilder (~> 2.5)

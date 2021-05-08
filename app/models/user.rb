@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :friends, foreign_key: "friend_id", through: :friendships
   has_many :friend_requests, foreign_key: "receiver_id"
+  has_many :songs
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

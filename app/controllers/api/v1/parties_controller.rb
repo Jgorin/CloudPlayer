@@ -1,7 +1,7 @@
 class Api::V1::PartiesController < ApiController
 
   def show
-    render json: Party.find(params[:id])
+    render json: Party.find(params[:id]), serializer: PartyShowSerializer
   end
 
   def create

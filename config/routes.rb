@@ -11,14 +11,25 @@ Rails.application.routes.draw do
   get "/users/:id/parties/new", to: "homes#index"
   get "/users/:id/friend_requests", to: "homes#index"
   get "/users/:id/party_invites", to: "homes#index"
+  get "/parties/:id", to: "homes#index"
 
   namespace :api do
     namespace :v1 do
+
+      resources :songs do
+        collection do
+          get "search"
+          get "get_album_art"
+        end
+      end
+
       resources :parties, only: [:show]
+
       resources :users, only: [:show] do
         collection do
           get 'search'
         end
+
         resources :friend_requests, only: [:create, :destroy] do
           collection do
             delete 'accept'
