@@ -38,7 +38,7 @@ const UserTopBar = (props) => {
       <Link to={`/users/${user.id}/party_invites`} className="selectable"><h4>{partyInvitesLabel}</h4></Link>
       <Link to={`/users/${user.id}/parties`} className="selectable"><h4>Parties</h4></Link>
       <SearchBar/>
-      <Link to={`/users/${user.id}/parties/new`} className="button large text-center">New Party</Link>
+      <Link to={`/users/${user.id}/parties/new`} className="button large text-center vertical-center">New Party</Link>
     </div>
   )
 }

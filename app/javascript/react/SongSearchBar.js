@@ -20,16 +20,12 @@ const SongSearchBar = (props) => {
     event.preventDefault()
   }
 
-  if(query == ""){
-    dispatch(setResults([]))
-  }
-
   return(
-    <div>
+    <div className="searchBar">
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleChange} value={query}/>
+        <input type="text" onChange={handleChange} value={query} className="rounded"/>
+        <SongSearchResults/>
       </form>
-      <SongSearchResults/>
     </div>
   )
 }

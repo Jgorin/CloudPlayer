@@ -17,7 +17,7 @@ const SongSearchResults = (props) => {
   }
 
   return(
-    <ul>
+    <ul className="song-results light-color">
       {resultsList}
     </ul>
   )

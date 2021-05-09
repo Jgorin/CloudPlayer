@@ -16,3 +16,7 @@ export const postUser = (formPayload) => {
 export const searchUsers = (query) => {
   return GET(`/users/search?` + new URLSearchParams({query: query}))
 }
+
+export const getProfilePicture = (userId) => {
+  return GET(`/users/${userId}/profile_pictures`)
+}

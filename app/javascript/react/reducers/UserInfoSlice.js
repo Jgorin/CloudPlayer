@@ -17,6 +17,7 @@ const UserInfoSlice = createSlice({
       state.email = action.payload.email
       state.username = action.payload.username
       state.profilePhoto = action.payload.profilePhoto
+      state.provider = action.payload.provider
     }
   }
 })

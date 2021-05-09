@@ -127,3 +127,12 @@
   border-color: black;
   border-width: 2px;
 }
+
+.vertical-center{
+  margin-top: 40px !important;
+}
+
+.song-results{
+  overflow: auto;
+  max-height: 400px;
+}
