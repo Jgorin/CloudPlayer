@@ -70,9 +70,8 @@
 
 .searchBar{
   text-align: center;
-  width: 45%;
   margin-left: 25px;
-  margin-right: 25px;
+  margin-right: 50px;
 }
 
 .searchBarTop{
@@ -142,4 +141,9 @@
 .song-results{
   overflow: auto;
   max-height: 400px;
+}
+
+.album-art{
+  width: 60px;
+  height: 60px;
 }
