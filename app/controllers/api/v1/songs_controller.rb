@@ -7,8 +7,8 @@ class Api::V1::SongsController < ApiController
   end
 
   def get_album_art
-    url = params[:albumUri]
-    response = Faraday.get("https://open.spotify.com/oembed?", { url: url })
+    uri = params[:trackUri]
+    response = Faraday.get("https://open.spotify.com/oembed?", { url: uri })
     render json: response.body
   end
 end

@@ -23,7 +23,8 @@ const SongSearchBar = (props) => {
   return(
     <div className="searchBar">
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleChange} value={query} className="rounded"/>
+        <label htmlFor="search">Hit enter to search:</label>
+        <input type="text" onChange={handleChange} name="search" value={query} className="rounded"/>
         <SongSearchResults/>
       </form>
     </div>

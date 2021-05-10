@@ -21,9 +21,7 @@ const PartyRoom = (props) => {
   }
 
   useEffect(() => {
-    if(party.title == null || user.id == null){
-      fetchPartyWrapper()
-    }
+    fetchPartyWrapper()
   }, [])
 
   return(
