@@ -30,6 +30,8 @@ Rails.application.routes.draw do
           get 'search'
         end
 
+        resources :profile_pictures, only: [:index]
+
         resources :friend_requests, only: [:create, :destroy] do
           collection do
             delete 'accept'

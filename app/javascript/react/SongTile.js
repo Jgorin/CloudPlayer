@@ -1,28 +1,11 @@
-import React, { useEffect, useState } from "react"
-import { getAlbumArt } from "./fetches/SongFetches"
+import React from "react"
 
 const SongTile = (props) => {
-  const[albumArtUrl, setAlbumArtUrl] = useState(null)
   const { song } = props
-  
-  const getAlbumArtWrapper = async() => {
-    const response = await getAlbumArt(song.album.uri)
-    setAlbumArtUrl(response.thumbnail_url)
-  }
-
-  useEffect(() => {
-    getAlbumArtWrapper()
-  }, [])
-
-  let albumCover
-  if(albumArtUrl){
-    albumCover = <img src={albumArtUrl} className="profile-photo"/>
-  }
 
   return(
     <li className="grid-x">
-      {albumCover}
-      <h4>{`${song.name} - ${song.album.name}`}</h4>
+      <iframe src={`https://open.spotify.com/embed/track/${song.id}`} id="song" width="450" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media" className="rounded"></iframe>
     </li>
   )
 }

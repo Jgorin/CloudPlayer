@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import {Link} from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { selectUser } from "./reducers/UserInfoSlice"
 import { selectFriendRequests } from "./reducers/UserFriendRequestSlice"
@@ -33,12 +33,12 @@ const UserTopBar = (props) => {
     <div className="userTopBar menu">
       <UserProfilePhoto user={user}/>
       <h2>{user.username}</h2>
-      <Link to={`/users/${user.id}/friends`} className="selectable"><h4>Friends</h4></Link>
-      <Link to={`/users/${user.id}/friend_requests`} className="selectable"><h4>{friendRequestLabel}</h4></Link>
-      <Link to={`/users/${user.id}/party_invites`} className="selectable"><h4>{partyInvitesLabel}</h4></Link>
-      <Link to={`/users/${user.id}/parties`} className="selectable"><h4>Parties</h4></Link>
+      <NavLink to={`/users/${user.id}/friends`} className="selectable"><h4>Friends</h4></NavLink>
+      <NavLink to={`/users/${user.id}/friend_requests`} className="selectable"><h4>{friendRequestLabel}</h4></NavLink>
+      <NavLink to={`/users/${user.id}/party_invites`} className="selectable"><h4>{partyInvitesLabel}</h4></NavLink>
+      <NavLink to={`/users/${user.id}/parties`} className="selectable"><h4>Parties</h4></NavLink>
       <SearchBar/>
-      <Link to={`/users/${user.id}/parties/new`} className="button large text-center">New Party</Link>
+      <NavLink to={`/users/${user.id}/parties/new`} className="button large text-center vertical-center">New Party</NavLink>
     </div>
   )
 }
