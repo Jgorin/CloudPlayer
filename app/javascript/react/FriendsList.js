@@ -27,7 +27,7 @@ const FriendsList = props => {
         <div className="cell small-1">
           <UserProfilePhoto user={friend}/>
         </div>
-        <div className="cell small-2">
+        <div className="cell small-4">
           <h2>{friend.username}</h2>
         </div>
         <FriendButton otherUserId={friend.id}/>

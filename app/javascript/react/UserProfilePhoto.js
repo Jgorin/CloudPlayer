@@ -6,6 +6,7 @@ const DefaultImageUrl = "http://mycloudplayer.s3.amazonaws.com/uploads/default-p
 const UserProfilePhoto = (props) => {
   const { user } = props
   const [imageUrl, setImageUrl] = useState(DefaultImageUrl)
+  debugger
 
   const fetchProfilePictureWrapper = async() => {
     const response = await getProfilePicture(user.id)

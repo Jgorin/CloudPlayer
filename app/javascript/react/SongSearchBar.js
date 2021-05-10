@@ -8,16 +8,16 @@ const SongSearchBar = (props) => {
   const dispatch = useDispatch()
   const query = useSelector(selectQuery)
   
-  const handleChange = async(event) => {
+  const handleChange = (event) => {
     dispatch(setQuery(event.currentTarget.value))
-    if(event.currentTarget.value.length > 0){
-      const response = await searchSongs(event.currentTarget.value)
-      dispatch(setResults(response.tracks.items))
-    }
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault()
+    if(query.length > 0){
+      const response = await searchSongs(query)
+      dispatch(setResults(response.tracks.items))
+    }
   }
 
   return(
