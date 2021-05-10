@@ -16,14 +16,16 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
 
-      resources :songs do
+      resources :songs, only: [:index] do
         collection do
           get "search"
           get "get_album_art"
         end
       end
 
-      resources :parties, only: [:show]
+      resources :parties, only: [:show] do
+        resources :songs, only: [:create, :destroy]
+      end
 
       resources :users, only: [:show] do
         collection do

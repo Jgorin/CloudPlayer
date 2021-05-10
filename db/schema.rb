@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2021_05_08_154208) do
 
   create_table "songs", force: :cascade do |t|
     t.string "uid", null: false
+    t.string "uri", null: false
     t.string "name", null: false
     t.string "album_name", null: false
     t.bigint "user_id", null: false
