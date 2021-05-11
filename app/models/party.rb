@@ -1,5 +1,6 @@
 class Party < ApplicationRecord
   validates :title, presence: true
+  validates :token, presence: true
 
   has_many :party_invites
   has_many :party_memberships

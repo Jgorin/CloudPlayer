@@ -32,7 +32,7 @@ const SongQueueTile = (props) => {
         {artwork}
       </div>
       <div className="cell small-10">
-        <h4>{`${song.name} - ${song.album_name}`}</h4>
+        <h4>{`${song.name} - ${song.album.name}`}</h4>
       </div>
     </li>
   )

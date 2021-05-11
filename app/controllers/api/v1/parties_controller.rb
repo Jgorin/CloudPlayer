@@ -9,7 +9,7 @@ class Api::V1::PartiesController < ApiController
     partyTitle = params[:title]
     invitedIds = params[:invites]
     if user
-      party = Party.new(title: partyTitle)
+      party = Party.new(title: partyTitle, token: session["credentials"]["token"])
       if !party.save
         render_errors(party)
       end
@@ -28,10 +28,17 @@ class Api::V1::PartiesController < ApiController
     end
     render json: party
   end
+
+  def playback_controls
+    response = Faraday.get("https://api.spotify.com/v1/me/player", nil, { "Authorization": "Bearer #{session[:credentials]["token"]}" })
+    render json: JSON.parse(response.body)
+  end
+
+  private
+
+  def render_errors(item)
+    render json: { error: item.errors.full_messages.to_sentence }
+  end
+
 end
 
-private
-
-def render_errors(item)
-  render json: { error: item.errors.full_messages.to_sentence }
-end

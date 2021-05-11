@@ -24,7 +24,7 @@ const SongTile = (props) => {
 
   const postSongWrapper = async() => {
     const response = await postSong(party.id, user.id, song)
-    dispatch(addSong(response))
+    // dispatch(addSong(response))
   }
 
   return(

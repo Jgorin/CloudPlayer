@@ -1,19 +1,22 @@
 class Api::V1::SongsController < ApiController
 
   def create
-    user = User.find(params[:user_id])
-    party = Party.find(params[:party_id])
-    songDetails = params[:song]
-    if user && party
-      song = Song.new(name: songDetails["name"], album_name: songDetails["album_name"], uid: songDetails["uid"], uri: songDetails["uri"], user: user, party: party)
-      if song.save
-        render json: song
-      else
-        render json: { error: "couldnt save song...#{song.errors.full_messages.to_sentence}" }
-      end
-    else 
-      render json: { error: "Could not find party/user..." }
-    end
+    # user = User.find(params[:user_id])
+    # party = Party.find(params[:party_id])
+    # songDetails = params[:song]
+    # if user && party
+    #   song = Song.new(name: songDetails["name"], album_name: songDetails["album_name"], uid: songDetails["uid"], uri: songDetails["uri"], user: user, party: party)
+    #   if song.save
+        
+    #     render json: song
+    #   else
+    #     render json: { error: "couldnt save song...#{song.errors.full_messages.to_sentence}" }
+    #   end
+    # else 
+    #   render json: { error: "Could not find party/user..." }
+    # end
+    response = Faraday.post("https://api.spotify.com/v1/me/player/queue?uri=#{params[:song]["uri"]}", nil, { "Accept": "application/json", "Content-Type": "application/json", "Authorization": "Bearer #{session[:credentials]["token"]}" })
+    render json: nil
   end
 
   def destroy

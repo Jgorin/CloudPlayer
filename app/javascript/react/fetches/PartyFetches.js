@@ -7,3 +7,7 @@ export const createParty = (userId, title, invites) => {
 export const fetchParty = (partyId) => {
   return GET(`/parties/${partyId}`)
 }
+
+// export const fetchPlaybackControls = () => {
+//   return GET(`/parties/playback_controls`)
+// }

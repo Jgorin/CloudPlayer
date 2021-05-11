@@ -10,24 +10,17 @@ const FriendRequestsList = (props) => {
   const friendRequests = useSelector(selectFriendRequests)
   const user = useSelector(selectUser)
 
-  const toggleOpen = () => {
-    setIsOpen(!isOpen)
-  }
-
-  let requestList
-  if(isOpen){
-    requestList = friendRequests.map((request) => {
-      if(request.sender.id != user.id){
-        return(
-          <li key={request.sender.id}>
-            <UserProfilePhoto user={request.sender}/>
-            <p>{request.sender.username}</p>
-            <FriendButton otherUserId={request.sender.id}/>
-          </li>
-        )
-      }
-    })
-  }
+  const requestList = friendRequests.map((request) => {
+    if(request.sender.id != user.id){
+      return(
+        <li key={request.sender.id}>
+          <UserProfilePhoto user={request.sender}/>
+          <p>{request.sender.username}</p>
+          <FriendButton otherUserId={request.sender.id}/>
+        </li>
+      )
+    }
+  })
 
   return(
     <div className="list">

@@ -280,8 +280,11 @@ Devise.setup do |config|  config.secret_key = Rails.application.secret_key_base
   require 'omniauth-spotify'
   config.omniauth :spotify, ENV["SPOTIFY_CLIENT_ID"], ENV["SPOTIFY_SECRET"], scope: %w(
     playlist-read-private
+    user-modify-playback-state
+    user-read-playback-state
     user-read-private
     user-read-email
+    streaming
   ).join(' ')
 
   # ==> Warden configuration

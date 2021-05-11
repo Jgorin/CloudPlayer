@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2021_05_08_154208) do
 
   create_table "parties", force: :cascade do |t|
     t.string "title", null: false
+    t.string "token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
