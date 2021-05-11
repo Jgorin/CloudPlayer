@@ -24,12 +24,17 @@ Rails.application.routes.draw do
       end
 
       resources :parties, only: [:show] do
+        collection do
+          get "playback_controls"
+        end
         resources :songs, only: [:create, :destroy]
       end
 
       resources :users, only: [:show] do
         collection do
           get 'search'
+          get 'current_user_token'
+          post 'set_playback'
         end
 
         resources :profile_pictures, only: [:index]
