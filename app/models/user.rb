@@ -8,13 +8,14 @@ class User < ApplicationRecord
   devise :omniauthable, :omniauth_providers => [:spotify]
 
 
-  has_many :party_invites, foreign_key: "receiver_id"
-  has_many :party_memberships
-  has_many :parties, through: :party_memberships
+  has_many :playlist_invites, foreign_key: "receiver_id"
+  
   has_many :friendships
   has_many :friends, foreign_key: "friend_id", through: :friendships
   has_many :friend_requests, foreign_key: "receiver_id"
-  has_many :songs
+  has_many :submissions
+  has_many :playlists, through: :submissions
+  has_many :songs, through: :submissions
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_08_154208) do
+ActiveRecord::Schema.define(version: 2021_05_12_103329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,42 +33,49 @@ ActiveRecord::Schema.define(version: 2021_05_08_154208) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
-  create_table "parties", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "token", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "party_invites", force: :cascade do |t|
+  create_table "playlist_invites", force: :cascade do |t|
     t.bigint "sender_id", null: false
     t.bigint "receiver_id", null: false
-    t.bigint "party_id", null: false
+    t.bigint "playlist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["party_id"], name: "index_party_invites_on_party_id"
-    t.index ["receiver_id"], name: "index_party_invites_on_receiver_id"
-    t.index ["sender_id"], name: "index_party_invites_on_sender_id"
+    t.index ["playlist_id"], name: "index_playlist_invites_on_playlist_id"
+    t.index ["receiver_id"], name: "index_playlist_invites_on_receiver_id"
+    t.index ["sender_id"], name: "index_playlist_invites_on_sender_id"
   end
 
-  create_table "party_memberships", force: :cascade do |t|
+  create_table "playlist_memberships", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "party_id", null: false
+    t.bigint "playlist_id", null: false
+    t.boolean "has_submitted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["party_id"], name: "index_party_memberships_on_party_id"
-    t.index ["user_id"], name: "index_party_memberships_on_user_id"
+    t.index ["playlist_id"], name: "index_playlist_memberships_on_playlist_id"
+    t.index ["user_id"], name: "index_playlist_memberships_on_user_id"
+  end
+
+  create_table "playlists", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "songs", force: :cascade do |t|
-    t.string "uid", null: false
     t.string "uri", null: false
     t.string "name", null: false
-    t.string "album_name", null: false
+    t.string "album", null: false
+    t.string "artist", null: false
+    t.bigint "submission_id", null: false
+    t.index ["submission_id"], name: "index_songs_on_submission_id"
+  end
+
+  create_table "submissions", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "party_id", null: false
-    t.index ["party_id"], name: "index_songs_on_party_id"
-    t.index ["user_id"], name: "index_songs_on_user_id"
+    t.bigint "playlist_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["playlist_id"], name: "index_submissions_on_playlist_id"
+    t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

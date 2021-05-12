@@ -1,22 +1,22 @@
-class Api::V1::PartyInvitesController < ApiController
+class Api::V1::PlaylistInvitesController < ApiController
   def accept
     user = User.find(params[:user_id])
-    invite = PartyInvite.find(params[:invite_id])
-    party = invite.party
+    invite = PlaylistInvite.find(params[:invite_id])
+    playlist = invite.playlist
     if user && invite.destroy
-      membership = PartyMembership.new(user: user, party: party)
+      membership = PlaylistMembership.new(user: user, playlist: playlist)
       if membership.save
-        render json: party
+        render json: playlist
       else
         render json: {errors: membership.errors.full_messages.to_sentence}
       end
     else
-      render json: { errors: "Could not find user or party" }
+      render json: { errors: "Could not find user or playlist" }
     end
   end
 
   def destroy
-    invite = PartyInvite.find(params[:id])
+    invite = PlaylistInvite.find(params[:id])
     if invite.destroy
       render json: invite
     else

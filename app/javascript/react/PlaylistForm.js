@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import PartyInviteListTile from "./PartyInviteListTile"
+import PlaylistInviteListTile from "./PlaylistInviteListTile"
 import { selectForm, setTitle, setInvites } from "./reducers/InvitationFormSlice"
 import NewInviteSearchBar from "./NewInviteSearchBar"
-import { createParty } from "./fetches/PartyFetches"
-import { addParty } from "./reducers/UserPartySlice"
+import { createPlaylist } from "./fetches/PlaylistFetches"
+import { addInvite } from "./reducers/UserPlaylistInviteSlice"
 import { selectUser } from "./reducers/UserInfoSlice"
 
-const PartyForm = (props) => {
-  const[shouldRedirect, setShouldRedirect] = useState(false)
+const PlaylistForm = (props) => {
+  const[redirectId, setRedirectId] = useState(null)
   const dispatch = useDispatch()
   const form = useSelector(selectForm)
   const user = useSelector(selectUser)
@@ -18,7 +18,7 @@ const PartyForm = (props) => {
   
   let tiles = []
   for(let i = 0; i < invitationList.length; i++){
-    let component = <PartyInviteListTile key={i} user={invitationList[i]} id={i}/>
+    let component = <PlaylistInviteListTile key={i} user={invitationList[i]} id={i}/>
     tiles.push(component)
   }
 
@@ -26,25 +26,24 @@ const PartyForm = (props) => {
     const invitedIds = invitationList.map((user) => {
       return(user.id)
     })
-    const response = await createParty(user.id, title, invitedIds)
-    debugger
-    dispatch(addParty(response.party))
+    const response = await createPlaylist(user.id, title, invitedIds)
+    dispatch(addInvite(response.playlist_invite))
     dispatch(setTitle(""))
     dispatch(setInvites([]))
-    setShouldRedirect(true)
+    setRedirectId(response.playlist_invite.playlist.id)
   }
 
   const handleTitleChange = (event) => {
     dispatch(setTitle(event.currentTarget.value))
   }
 
-  if(shouldRedirect){
-    return <Redirect to={`/users/${user.id}/parties`}/>
+  if(redirectId){
+    return <Redirect to={`/playlists/${redirectId}/submissions/new`}/>
   }
 
   return(
-    <div className="partyForm">
-      <h2 className="centered">Create a new Party</h2>
+    <div className="playlistForm">
+      <h2 className="centered">Create a new Playlist</h2>
       <h4>Title</h4>
       <input type="text" onChange={handleTitleChange} value={title}/>
       <NewInviteSearchBar/>
@@ -56,4 +55,4 @@ const PartyForm = (props) => {
   )
 }
 
-export default PartyForm
+export default PlaylistForm

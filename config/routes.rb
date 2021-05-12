@@ -7,11 +7,13 @@ Rails.application.routes.draw do
 
   get "/users/:id", to: "homes#index"
   get "/users/:id/friends", to: "homes#index"
-  get "/users/:id/parties", to: "homes#index"
-  get "/users/:id/parties/new", to: "homes#index"
+  get "/users/:id/playlists", to: "homes#index"
+  get "/users/:id/playlists/new", to: "homes#index"
   get "/users/:id/friend_requests", to: "homes#index"
-  get "/users/:id/party_invites", to: "homes#index"
-  get "/parties/:id", to: "homes#index"
+  get "/users/:id/playlist_invites", to: "homes#index"
+
+  get "/playlists/:id", to: "homes#index"
+  get "/users/:id/playlist_invites/:playlist_id/submissions/new", to: "homes#index"
 
   namespace :api do
     namespace :v1 do
@@ -23,7 +25,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :parties, only: [:show] do
+      resources :playlists, only: [:show] do
         collection do
           get "playback_controls"
         end
@@ -45,11 +47,12 @@ Rails.application.routes.draw do
           end
         end
         resources :friendships, only: [:destroy]
-        resources :parties, only: [:create]
-        resources :party_invites, only: [:destroy] do
+        resources :playlists, only: [:create]
+        resources :playlist_invites, only: [:destroy] do
           collection do
             delete "accept"
           end
+          resources :submissions, only: [:create]
         end
       end
     end

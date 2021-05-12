@@ -1,5 +1,5 @@
-class PartyMembershipSerializer < ActiveModel::Serializer
-  attributes :id, :user, :party
+class PlaylistMembershipSerializer < ActiveModel::Serializer
+  attributes :id, :user, :playlist
   belongs_to :user
-  belongs_to :party
+  belongs_to :playlist
 end

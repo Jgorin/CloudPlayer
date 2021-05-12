@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import { removeUser } from "./reducers/InvitationFormSlice"
 import UserProfilePhoto from "./UserProfilePhoto"
 
-const PartyInviteListTile = (props) => {
+const PlaylistInviteListTile = (props) => {
   const dispatch = useDispatch()
 
   const handleClick = () => {
@@ -20,4 +20,4 @@ const PartyInviteListTile = (props) => {
   )
 }
 
-export default PartyInviteListTile
+export default PlaylistInviteListTile

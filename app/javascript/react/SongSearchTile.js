@@ -1,34 +1,29 @@
 import React, { useEffect, useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { getArtwork } from "./fetches/SongFetches"
-import { postSong } from "./fetches/SongFetches"
-import { selectParty, addSong } from "./reducers/PartyRoomInfoSlice"
-import { selectUser } from "./reducers/UserInfoSlice"
+import { addSong } from "./reducers/SubmissionFormSlice"
 
-const SongTile = (props) => {
+const SongSearchTile = (props) => {
   const[artwork, setArtwork] = useState(null)
   const { song } = props
 
   const dispatch = useDispatch()
-  const party = useSelector(selectParty)
-  const user = useSelector(selectUser)
 
   const fetchArtworkWrapper = async() => {
     const response = await getArtwork(song.uri)
     setArtwork(<img src={response.thumbnail_url} className="album-art"/>)
   }
 
+  const addSongWrapper = () => {
+    dispatch(addSong(song))
+  }
+
   useEffect(() => {
     fetchArtworkWrapper()
   }, [])
 
-  const postSongWrapper = async() => {
-    const response = await postSong(party.id, user.id, song)
-    // dispatch(addSong(response))
-  }
-
   return(
-    <li className="grid-x text-left callout" onClick={postSongWrapper}>
+    <li className="grid-x text-left callout" onClick={addSongWrapper}>
       <div className="cell small-2">
         {artwork}
       </div>
@@ -39,4 +34,4 @@ const SongTile = (props) => {
   )
 }
 
-export default SongTile
+export default SongSearchTile
