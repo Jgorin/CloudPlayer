@@ -1,9 +1,9 @@
-class CreatePartyInvites < ActiveRecord::Migration[5.2]
+class CreatePlaylistInvites < ActiveRecord::Migration[5.2]
   def change
-    create_table :party_invites do |t|
+    create_table :playlist_invites do |t|
       t.belongs_to :sender, class: "User", null: false
       t.belongs_to :receiver, class: "User", null: false
-      t.belongs_to :party, null: false
+      t.belongs_to :playlist, null: false
       t.timestamps null: false
     end
   end

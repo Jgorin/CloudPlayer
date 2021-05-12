@@ -2,22 +2,22 @@ import { combineReducers } from "redux"
 import UserInfoSlice from "./UserInfoSlice"
 import UserFriendSlice from "./UserFriendSlice"
 import UserFriendRequestSlice from "./UserFriendRequestSlice"
-import UserPartySlice from "./UserPartySlice"
-import UserPartyInviteSlice from "./UserPartyInviteSlice"
+import UserPlaylistSlice from "./UserPlaylistSlice"
+import UserPlaylistInviteSlice from "./UserPlaylistInviteSlice"
 import InvitationFormSlice from "./InvitationFormSlice"
-import PartyRoomInfoSlice from "./PartyRoomInfoSlice"
 import SongSearchFormSlice from "./SongSearchFormSlice"
+import SubmissionFormSlice from "./SubmissionFormSlice"
 
 
 const RootSlice = combineReducers({
   info: UserInfoSlice,
   friendships: UserFriendSlice,
   friendRequests: UserFriendRequestSlice,
-  partyInvites: UserPartyInviteSlice,
-  parties: UserPartySlice,
+  playlistInvites: UserPlaylistInviteSlice,
+  playlists: UserPlaylistSlice,
   invitationForm: InvitationFormSlice,
-  partyRoomInfo: PartyRoomInfoSlice,
-  songSearchForm: SongSearchFormSlice
+  songSearchForm: SongSearchFormSlice,
+  submissionForm: SubmissionFormSlice
 })
 
 export default RootSlice

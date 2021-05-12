@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = []
 
-const UserPartyInviteSlice = createSlice({
-  name: "userPartyInvites",
+const UserPlaylistInviteSlice = createSlice({
+  name: "userPlaylistInvites",
   initialState,
   reducers: {
     addInvite(state, action){
@@ -18,7 +18,7 @@ const UserPartyInviteSlice = createSlice({
   }
 })
 
-export const selectPartyInvites = (state) => { return state.partyInvites }
+export const selectPlaylistInvites = (state) => { return state.playlistInvites }
 
-export const { addInvite, setInvites, removeInvite } = UserPartyInviteSlice.actions
-export default UserPartyInviteSlice.reducer
+export const { addInvite, setInvites, removeInvite } = UserPlaylistInviteSlice.actions
+export default UserPlaylistInviteSlice.reducer

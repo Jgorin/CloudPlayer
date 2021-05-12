@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { selectParty, removeSong } from "./reducers/PartyRoomInfoSlice"
-import { selectUser } from "./reducers/UserInfoSlice"
-import { getArtwork, deleteSong } from "./fetches/SongFetches"
+import { useDispatch } from "react-redux"
+import { getArtwork } from "./fetches/SongFetches"
+import { deleteSong } from "./reducers/SubmissionFormSlice"
 
-const SongQueueTile = (props) => {
+const SongFormTile = (props) => {
   const[artwork, setArtwork] = useState(null)
-  const { song } = props
+  const { song, id } = props
   const dispatch = useDispatch()
-
-  const party = useSelector(selectParty)
-  const user = useSelector(selectUser)
 
   const fetchArtworkWrapper = async() => {
     const response = await getArtwork(song.uri)
@@ -21,10 +17,10 @@ const SongQueueTile = (props) => {
     fetchArtworkWrapper()
   }, [])
 
-  const deleteSongWrapper = async() => {
-    const response = await deleteSong(party.id, song.id)
-    dispatch(removeSong(response.id))
+  const deleteSongWrapper = (event) => {
+    dispatch(deleteSong(id))
   }
+
 
   return(
     <li className="grid-x text-left callout" onClick={deleteSongWrapper}>
@@ -37,4 +33,4 @@ const SongQueueTile = (props) => {
     </li>
   )
 }
-export default SongQueueTile
+export default SongFormTile

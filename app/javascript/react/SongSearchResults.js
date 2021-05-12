@@ -1,7 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { selectQuery, selectResults } from "./reducers/SongSearchFormSlice"
-import SongTile from "./SongTile"
+import SongSearchTile from "./SongSearchTile"
 
 const SongSearchResults = (props) => {
   const results = useSelector(selectResults)
@@ -11,7 +11,7 @@ const SongSearchResults = (props) => {
   if(query.length > 0){
     resultsList = results.map((result) => {
       return(
-        <SongTile key={result.id} song={result}/>
+        <SongSearchTile key={result.id} song={result}/>
       )
     })
   }
