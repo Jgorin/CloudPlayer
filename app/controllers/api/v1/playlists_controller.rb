@@ -13,20 +13,8 @@ class Api::V1::PlaylistsController < ApiController
       if !playlist.save
         render_errors(playlist)
       else
-        inviteHost = PlaylistInvite.create(sender: user, receiver: user, playlist: playlist)
-        if !inviteHost.save
-          render_errors(invite)
-        else
-          if invitedIds.length > 0
-            invitedUsers = User.find(invitedIds)
-            invitedUsers.each do |invitedUser|
-              invite = PlaylistInvite.create(sender: user, receiver: invitedUser, playlist: playlist)
-            end
-          end
-          render json: inviteHost
-        end
-      end
-      
+        send_invites(user, playlist, invitedIds)
+      end 
     else
       render json: { error: "Could not find user with id #{params[:user]}" }
     end
@@ -38,5 +26,19 @@ class Api::V1::PlaylistsController < ApiController
     render json: { error: item.errors.full_messages.to_sentence }
   end
 
+  def send_invites(user, playlist, invitedIds)
+    inviteHost = PlaylistInvite.create(sender: user, receiver: user, playlist: playlist)
+    if !inviteHost.save
+      render_errors(invite)
+    else
+      if invitedIds.length > 0
+        invitedUsers = User.find(invitedIds)
+        invitedUsers.each do |invitedUser|
+          invite = PlaylistInvite.create(sender: user, receiver: invitedUser, playlist: playlist)
+        end
+      end
+      render json: inviteHost
+    end
+  end
 end
 

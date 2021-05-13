@@ -1,23 +1,31 @@
-import React from "react"
-import { useSelector } from "react-redux"
-import { selectPlaylists } from "./reducers/UserPlaylistSlice"
+import React, { useState, useEffect } from "react"
 import Playlist from "./Playlist"
+import { fetchPlaylist } from "./fetches/PlaylistFetches"
+
+const initialState = {
+  id: null,
+  title: null,
+  songs: []
+}
 
 const PlaylistShow = (props) => {
-  const playlists = useSelector(selectPlaylists)
-  const playlistId = parseInt(props.match.params.id)
+  const[playlist, setPlaylist] = useState(initialState)
+  const playlistId = props.match.params.id
 
-  let playlistDetails = {title: "", songs: []}
-  if(playlists.length > 0){
-    let playlist = playlists.filter(playlist => playlist.id == playlistId)
-    playlistDetails = playlist[0]
+  const fetchPlaylistWrapper = async() => {
+    const response = await fetchPlaylist(playlistId)
+    setPlaylist(response.playlist)
   }
+
+  useEffect(() => {
+    fetchPlaylistWrapper()
+  }, [])
   
   return(
     <div className="list">
-      <h1 className="text-center underlined">{playlistDetails.title}</h1>
+      <h1 className="text-center underlined">{playlist.title}</h1>
       <div className="playlist">
-        <Playlist songs={playlistDetails.songs}/>
+        <Playlist songs={playlist.songs}/>
       </div>
     </div>
   )
