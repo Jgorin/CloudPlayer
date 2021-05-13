@@ -13,10 +13,16 @@ const FriendRequestsList = (props) => {
   const requestList = friendRequests.map((request) => {
     if(request.sender.id != user.id){
       return(
-        <li key={request.sender.id}>
-          <UserProfilePhoto user={request.sender}/>
-          <p>{request.sender.username}</p>
-          <FriendButton otherUserId={request.sender.id}/>
+        <li key={request.sender.id} className="grid-x grid-margin-x callout rounded blue">
+          <div className="cell small-1">
+            <UserProfilePhoto user={request.sender}/>
+          </div>
+          <div className="cell small-2">
+            <h4>{request.sender.username}</h4>
+          </div>
+          <div>
+            <FriendButton otherUserId={request.sender.id}/>
+          </div>
         </li>
       )
     }

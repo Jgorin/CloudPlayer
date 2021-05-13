@@ -36,7 +36,9 @@ const NewInviteSearchBar = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(addUser(state.results[0]))
+    if(state.results.length > 0){
+      dispatch(addUser(state.results[0]))
+    }
     setState({
       ["query"]: "",
       ["results"]: []

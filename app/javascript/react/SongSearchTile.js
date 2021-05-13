@@ -23,14 +23,16 @@ const SongSearchTile = (props) => {
   }, [])
 
   return(
-    <li className="grid-x text-left callout" onClick={addSongWrapper}>
-      <div className="cell small-2">
-        {artwork}
-      </div>
-      <div className="cell small-10">
-        <h4>{`${song.name} - ${song.album.name}`}</h4>
-      </div>
-    </li>
+    <a>
+      <li className="grid-x text-left callout selectable" onClick={addSongWrapper}>
+        <div className="cell small-2">
+          {artwork}
+        </div>
+        <div className="cell small-10">
+          <h4>{`${song.name} - ${song.album.name}`}</h4>
+        </div>
+      </li>
+    </a>
   )
 }
 
