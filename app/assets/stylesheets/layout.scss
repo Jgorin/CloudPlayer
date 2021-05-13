@@ -3,6 +3,7 @@
 html, body{
   margin: 0px;
   height: 100%;
+  font-family: 'Noto Sans', sans-serif !important;
 }
 
 .small_text{
@@ -126,4 +127,12 @@ html, body{
 }
 a{
   color: black;
+}
+
+.playlist{
+  overflow: auto;
+  height: 550px;
+}
+.playlistForm{
+  margin: 60px;
 }

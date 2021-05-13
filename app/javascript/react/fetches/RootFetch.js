@@ -8,7 +8,6 @@ import { setPlaylists } from "../reducers/UserPlaylistSlice"
 
 const RootFetch = async(dispatch) => {
   const parsedResponse = await fetchUser()
-  debugger
   const user = parsedResponse.user
   const info = {id: user.id, email: user.email, username: user.username, profilePhoto: user.profile_photo, provider: user.provider}
   dispatch(setUser(info))

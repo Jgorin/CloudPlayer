@@ -7,9 +7,11 @@ import NewInviteSearchBar from "./NewInviteSearchBar"
 import { createPlaylist } from "./fetches/PlaylistFetches"
 import { addInvite } from "./reducers/UserPlaylistInviteSlice"
 import { selectUser } from "./reducers/UserInfoSlice"
+import { render } from "enzyme"
 
 const PlaylistForm = (props) => {
   const[redirectId, setRedirectId] = useState(null)
+  const[errors, setErrors] = useState(null)
   const dispatch = useDispatch()
   const form = useSelector(selectForm)
   const user = useSelector(selectUser)
@@ -27,10 +29,15 @@ const PlaylistForm = (props) => {
       return(user.id)
     })
     const response = await createPlaylist(user.id, title, invitedIds)
-    dispatch(addInvite(response.playlist_invite))
-    dispatch(setTitle(""))
-    dispatch(setInvites([]))
-    setRedirectId(response.playlist_invite.playlist.id)
+    if(!response.error){
+      dispatch(addInvite(response.playlist_invite))
+      dispatch(setTitle(""))
+      dispatch(setInvites([]))
+      setRedirectId(response.playlist_invite.id)
+    }
+    else{
+      setErrors(response.error)
+    }
   }
 
   const handleTitleChange = (event) => {
@@ -38,12 +45,18 @@ const PlaylistForm = (props) => {
   }
 
   if(redirectId){
-    return <Redirect to={`/playlists/${redirectId}/submissions/new`}/>
+    return <Redirect to={`/users/${user.id}/playlist_invites/${redirectId}/submissions/new`}/>
+  }
+
+  let errorTile
+  if(errors){
+    errorTile = <h4>{errors}</h4>
   }
 
   return(
     <div className="playlistForm">
       <h2 className="centered">Create a new Playlist</h2>
+      {errors}
       <h4>Title</h4>
       <input type="text" onChange={handleTitleChange} value={title}/>
       <NewInviteSearchBar/>
