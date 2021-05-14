@@ -1,3 +1,6 @@
+require_relative "./services/spotify_api"
+
+
 class User < ApplicationRecord
   mount_uploader :profile_photo, ProfilePhotoUploader
   # Include default devise modules. Others available are:
@@ -50,5 +53,16 @@ class User < ApplicationRecord
       end
     end
     return User.find(friend_ids)
+  end
+
+  def photo(session)
+    if self.provider == "spotify"
+      url = SpotifyApi.get_profile_photo(session, self)
+    elsif self.profile_photo.url != nil
+      url = self.profile_photo.url
+    else
+      url = "http://mycloudplayer.s3.amazonaws.com/uploads/default-profile-picture.png"
+    end
+    return {url: url}
   end
 end

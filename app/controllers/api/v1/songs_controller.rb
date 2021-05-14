@@ -1,3 +1,5 @@
+require_relative "../../../models/services/spotify_api"
+
 class Api::V1::SongsController < ApiController
 
   def destroy
@@ -12,14 +14,14 @@ class Api::V1::SongsController < ApiController
   def search
     token = session[:credentials]["token"]
     query = params[:query]
-    response = Faraday.get("https://api.spotify.com/v1/search?", { q: query, type: "track" }, { "Accept": "application/json", "Content-Type": "application/json", "Authorization": "Bearer #{token}" })
-    render json: response.body
+    results = SpotifyApi.search(session, query)
+    render json: results
   end
 
   def get_album_art
-    uri = params[:trackUri]
-    response = Faraday.get("https://open.spotify.com/oembed?", { url: uri })
-    render json: response.body
+    url = params[:trackUri]
+    album_details = SpotifyApi.get_album_art(url)
+    render json: album_details
   end
 
   private
