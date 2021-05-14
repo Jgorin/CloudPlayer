@@ -30,9 +30,8 @@ class Api::V1::SubmissionsController < ApiController
   end
 
   def create_songs(recommendations, submission)
-    songs = []
     recommendations["tracks"].each do |track|
-      songs << Song.create(uri: track["uri"], name: track["name"], album: track["album"]["name"], artist: track["artists"][0]["name"], submission: submission)
+      Song.create(uri: track["uri"], name: track["name"], album: track["album"]["name"], artist: track["artists"][0]["name"], submission: submission)
     end
   end
 end

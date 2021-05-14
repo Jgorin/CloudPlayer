@@ -1,4 +1,4 @@
-import { GET, POST as POSTAPI } from "./ApiFetch"
+import { GET } from "./ApiFetch"
 import { POST } from "./Fetch"
 
 export const fetchUser = () => {
