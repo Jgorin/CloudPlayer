@@ -1,5 +1,6 @@
 class PlaylistShowSerializer < ActiveModel::Serializer
   attributes :id, :title, :songs
-  has_many :submissions
-  has_many :songs, through: :submissions
+  def songs
+    object.songs.shuffle(random: Random.new(1))
+  end
 end
