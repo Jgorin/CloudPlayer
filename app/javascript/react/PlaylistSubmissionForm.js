@@ -10,7 +10,7 @@ import { addPlaylist } from "./reducers/UserPlaylistSlice"
 import { removeInvite } from "./reducers/UserPlaylistInviteSlice"
 import { Button } from "@material-ui/core"
 import { setTabValue } from "./reducers/TopBarSlice"
-import { setSelectedId } from "./reducers/PlaylistScreenSlice"
+import { setSelectedPlaylist } from "./reducers/PlaylistScreenSlice"
 
 const PlaylistSubmissionForm = (props) => {
   const [redirectId, setRedirectId] = useState(null)
