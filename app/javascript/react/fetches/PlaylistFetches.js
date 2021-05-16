@@ -7,3 +7,7 @@ export const createPlaylist = (userId, title, invites) => {
 export const fetchPlaylist = (playlistId) => {
   return GET(`/playlists/${playlistId}`)
 }
+
+export const exportPlaylist = (userId, playlistId, playlistTitle) => {
+  return POST(`/playlists/${playlistId}/export`, {user_id: userId, playlist_title: playlistTitle})
+}

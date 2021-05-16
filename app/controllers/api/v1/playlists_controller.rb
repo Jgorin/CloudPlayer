@@ -1,3 +1,5 @@
+require_relative "../../../models/services/spotify_api"
+
 class Api::V1::PlaylistsController < ApiController
 
   def show
@@ -20,6 +22,14 @@ class Api::V1::PlaylistsController < ApiController
     else
       render json: { error: "Could not find user with id #{params[:user]}" }
     end
+  end
+
+  def export
+    user = User.find(params[:user_id])
+    playlist = Playlist.find(params[:playlist_id])
+    songs = playlist.songs.shuffle(random: Random.new(1))
+    spotify_playlist = SpotifyApi.create_user_playlist(session, user, params[:playlist_title])
+    SpotifyApi.add_songs_to_playlist(session, spotify_playlist["id"], songs)
   end
 
   private

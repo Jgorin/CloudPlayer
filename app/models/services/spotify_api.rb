@@ -52,6 +52,53 @@ module SpotifyApi
     return parsedResponse["images"][0]["url"]
   end
 
+  def self.create_user_playlist(session, user, playlist_title)
+    if user == nil
+      return
+    end
+    token = extract_token(session)
+    response = Faraday.post(
+      "https://api.spotify.com/v1/users/#{user.uid}/playlists",
+      JSON.generate({name: playlist_title}),
+      {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer #{token}"
+      }
+    )
+    return JSON.parse(response.body)
+  end
+
+  def self.get_user_playlists(session, user, token)
+    if user == nil
+      return
+    end
+    response = Faraday.get(
+      "https://api.spotify.com/v1/users/#{user.uid}/playlists",
+      nil,
+      {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer #{token}"
+      }
+    )
+
+    return JSON.parse(response.body)["items"]
+  end
+
+  def self.add_songs_to_playlist(session, playlist_id, songs)
+    token = extract_token(session)
+    song_uris = extract_uris(songs)
+    response = Faraday.post(
+      "https://api.spotify.com/v1/playlists/#{playlist_id}/tracks",
+      JSON.generate({"uris": song_uris}), 
+      {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer #{token}"
+      }
+    )
+  end
 
   private
 
@@ -68,5 +115,12 @@ module SpotifyApi
 
   def self.extract_token(session)
     return session["credentials"]["token"]
+  end
+
+  def self.extract_uris(songs)
+    uris = songs.map do |song|
+      song.uri
+    end
+    return uris
   end
 end
