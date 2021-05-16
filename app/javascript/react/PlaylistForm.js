@@ -61,8 +61,8 @@ const PlaylistForm = (props) => {
     <div className="playlistForm">
       <h2 className="centered">Create a new Playlist</h2>
       {errors}
-      <h4>Title</h4>
-      <input type="text" onChange={handleTitleChange} value={title}/>
+      <label htmlFor="title">Title</label>
+      <input type="text" name="title" onChange={handleTitleChange} value={title}/>
       <NewInviteSearchBar/>
       <List className={listClassName}>
         {tiles}

@@ -48,7 +48,7 @@ const NewInviteSearchBar = (props) => {
   return(
     <div>
       <form className="rounded" onSubmit={handleSubmit}>
-        <label htmlFor="inviteName">Search Friends</label>
+        <label htmlFor="inviteName">Invite Friends</label>
         <input type="text" id="inviteName" name="inviteName" onChange={handleChange} value={state.query} autoComplete="off"/>
       </form>
       {results}
