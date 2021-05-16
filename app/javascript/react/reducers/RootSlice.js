@@ -7,6 +7,9 @@ import UserPlaylistInviteSlice from "./UserPlaylistInviteSlice"
 import InvitationFormSlice from "./InvitationFormSlice"
 import SongSearchFormSlice from "./SongSearchFormSlice"
 import SubmissionFormSlice from "./SubmissionFormSlice"
+import PlaylistScreenSlice from "./PlaylistScreenSlice"
+import TopBarSlice from "./TopBarSlice"
+import PlaylistInviteListSlice from "./PlaylistInviteListSlice"
 
 
 const RootSlice = combineReducers({
@@ -17,7 +20,10 @@ const RootSlice = combineReducers({
   playlists: UserPlaylistSlice,
   invitationForm: InvitationFormSlice,
   songSearchForm: SongSearchFormSlice,
-  submissionForm: SubmissionFormSlice
+  submissionForm: SubmissionFormSlice,
+  playlistScreen: PlaylistScreenSlice,
+  topBar: TopBarSlice,
+  playlistInviteList: PlaylistInviteListSlice
 })
 
 export default RootSlice

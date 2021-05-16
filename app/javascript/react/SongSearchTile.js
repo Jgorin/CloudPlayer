@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { getArtwork } from "./fetches/SongFetches"
 import { addSong } from "./reducers/SubmissionFormSlice"
+import { ListItem } from "@material-ui/core"
 
 const SongSearchTile = (props) => {
   const[artwork, setArtwork] = useState(null)
@@ -23,16 +24,10 @@ const SongSearchTile = (props) => {
   }, [])
 
   return(
-    <a>
-      <li className="grid-x text-left callout selectable" onClick={addSongWrapper}>
-        <div className="cell small-2">
-          {artwork}
-        </div>
-        <div className="cell small-10">
-          <h4>{`${song.name} - ${song.album.name}`}</h4>
-        </div>
-      </li>
-    </a>
+    <ListItem onClick={addSongWrapper} className="search-tile" divider={true}>
+      {artwork}
+      <p>{`${song.name} - ${song.album.name}`}</p>
+    </ListItem>
   )
 }
 

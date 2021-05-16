@@ -2,6 +2,7 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { selectQuery, selectResults } from "./reducers/SongSearchFormSlice"
 import SongSearchTile from "./SongSearchTile"
+import { List } from "@material-ui/core"
 
 const SongSearchResults = (props) => {
   const results = useSelector(selectResults)
@@ -17,9 +18,9 @@ const SongSearchResults = (props) => {
   }
 
   return(
-    <ul className="song-results light-color">
+    <List className="song-results">
       {resultsList}
-    </ul>
+    </List>
   )
 }
 

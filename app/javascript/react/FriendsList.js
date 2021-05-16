@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React from "react"
+import { List, ListItem } from "@material-ui/core"
 import { useDispatch, useSelector } from "react-redux"
 import { selectFriendships } from "./reducers/UserFriendSlice"
 import { selectUser } from "./reducers/UserInfoSlice"
@@ -23,24 +24,20 @@ const FriendsList = props => {
     }
 
     return(
-      <li key={friend.id} className="grid-x grid-margin-x callout rounded blue">
-        <div className="cell small-1">
-          <UserProfilePhoto user={friend}/>
-        </div>
-        <div className="cell small-4">
-          <h2>{friend.username}</h2>
-        </div>
+      <ListItem key={friend.id} divider={true}>
+        <UserProfilePhoto user={friend}/>
+        <h2>{friend.username}</h2>
         <FriendButton otherUserId={friend.id}/>
-      </li>
+      </ListItem>
     )
   })
 
   return(
     <div className="list">
       <h2 className="underlined">Friends</h2>
-      <ul className="list">
+      <List>
         {friendsList}
-      </ul>
+      </List>
     </div>
   )
 }

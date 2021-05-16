@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { Redirect } from "react-router-dom"
+import React, { useState } from "react"
+import { Button } from "@material-ui/core"
 import { useSelector, useDispatch } from "react-redux"
 import PlaylistInviteListTile from "./PlaylistInviteListTile"
 import { selectForm, setTitle, setInvites } from "./reducers/InvitationFormSlice"
@@ -7,10 +7,11 @@ import NewInviteSearchBar from "./NewInviteSearchBar"
 import { createPlaylist } from "./fetches/PlaylistFetches"
 import { addInvite } from "./reducers/UserPlaylistInviteSlice"
 import { selectUser } from "./reducers/UserInfoSlice"
-import { render } from "enzyme"
+import { List } from "@material-ui/core"
+import { setPlaylistModalOpen, setTabValue } from "./reducers/TopBarSlice"
+import { setSelectedInvite } from "./reducers/PlaylistInviteListSlice"
 
 const PlaylistForm = (props) => {
-  const[redirectId, setRedirectId] = useState(null)
   const[errors, setErrors] = useState(null)
   const dispatch = useDispatch()
   const form = useSelector(selectForm)
@@ -30,10 +31,13 @@ const PlaylistForm = (props) => {
     })
     const response = await createPlaylist(user.id, title, invitedIds)
     if(!response.error){
+      debugger
       dispatch(addInvite(response.playlist_invite))
       dispatch(setTitle(""))
       dispatch(setInvites([]))
-      setRedirectId(response.playlist_invite.id)
+      dispatch(setPlaylistModalOpen(false))
+      dispatch(setSelectedInvite(response.playlist_invite.id))
+      dispatch(setTabValue(2))
     }
     else{
       setErrors(response.error)
@@ -44,13 +48,14 @@ const PlaylistForm = (props) => {
     dispatch(setTitle(event.currentTarget.value))
   }
 
-  if(redirectId){
-    return <Redirect to={`/users/${user.id}/playlist_invites/${redirectId}/submissions/new`}/>
-  }
-
   let errorTile
   if(errors){
     errorTile = <h4>{errors}</h4>
+  }
+
+  let listClassName
+  if(tiles.length > 0){
+    listClassName="callout"
   }
 
   return(
@@ -60,10 +65,10 @@ const PlaylistForm = (props) => {
       <h4>Title</h4>
       <input type="text" onChange={handleTitleChange} value={title}/>
       <NewInviteSearchBar/>
-      <ul>
+      <List className={listClassName}>
         {tiles}
-      </ul>
-      <a className="button large" onClick={handleSubmit}>Submit</a>
+      </List>
+      <Button onClick={handleSubmit} className="salmon" variant="contained">Submit</Button>
     </div>
   )
 }

@@ -138,12 +138,40 @@
   margin-top: 40px !important;
 }
 
-.song-results{
-  overflow: auto;
-  max-height: 400px;
+// .song-results{
+//   display:relative;
+//   overflow: auto;
+//   height: 400px;
+// }
+
+.added-songs{
+  margin: 25px !important;
 }
 
 .album-art{
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
+}
+
+.song-results{
+  overflow: scroll;
+  height: 300px;
+}
+
+.white-text{
+  color: rgb(190, 190, 190);
+}
+
+.divider{
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-right-color: rgb(182, 182, 182);
+}
+
+.playlistForm{
+  margin: 25px !important;
+}
+
+.song{
+  height: 50px !important;
 }

@@ -1,11 +1,12 @@
 import React from "react"
 import UserSearchTile from "./UserSearchTile"
+import { List, Divider } from '@material-ui/core';
 
 const SearchResults = (props) => {
   const { results } = props
 
   let resultsList
-  let className = "rounded overflow light-color"
+  let className = "overflow white"
   if(results.length > 0){
     className += " callout"
     resultsList = results.map((result)=>{
@@ -15,9 +16,9 @@ const SearchResults = (props) => {
     })
   }
   return(
-    <ul className={className}>
+    <List className={className}>
       {resultsList}
-    </ul>
+    </List>
   )
 }
 
