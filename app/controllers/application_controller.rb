@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    "/users/#{current_user.id}/friends"
+    "/users/#{current_user.id}/"
   end
 
   def authenticate_user!

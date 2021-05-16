@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { ListItem } from "@material-ui/core"
 import { useDispatch } from "react-redux"
 import { getArtwork } from "./fetches/SongFetches"
 import { deleteSong } from "./reducers/SubmissionFormSlice"
@@ -23,14 +24,14 @@ const SongFormTile = (props) => {
 
 
   return(
-    <li className="grid-x text-left callout" onClick={deleteSongWrapper}>
+    <ListItem className="grid-x callout song" onClick={deleteSongWrapper} divider={true}>
       <div className="cell small-2">
         {artwork}
       </div>
       <div className="cell small-10">
-        <h4>{`${song.name} - ${song.album.name}`}</h4>
+        <p>{`${song.name} - ${song.album.name}`}</p>
       </div>
-    </li>
+    </ListItem>
   )
 }
 export default SongFormTile

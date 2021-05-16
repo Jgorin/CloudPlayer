@@ -109,7 +109,8 @@ html, body{
 }
 
 .salmon{
-  background-color: $salmon;
+  background-color: $salmon !important;
+  color: rgb(228, 228, 228) !important;
 }
 
 .lightColor{
@@ -117,8 +118,8 @@ html, body{
 }
 
 .overlap{
-  position: absolute;
-  z-index: 10000;
+  position: absolute !important;
+  z-index: 10000 !important;
 }
 
 .userTopBar{
@@ -135,4 +136,20 @@ a{
 }
 .playlistForm{
   margin: 60px;
+}
+
+.white{
+  background-color: white !important;
+}
+
+.playlistdisplay{
+  background-color: rgb(241, 241, 241);
+}
+
+.search-tile{
+  height: 70px;
+}
+
+.medium-blue{
+  background-color: $medium-blue !important;
 }

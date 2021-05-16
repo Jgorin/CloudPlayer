@@ -6,11 +6,6 @@ Rails.application.routes.draw do
   resources :homes, only: [:index]
 
   get "/users/:id", to: "homes#index"
-  get "/users/:id/friends", to: "homes#index"
-  get "/users/:id/playlists", to: "homes#index"
-  get "/users/:id/playlists/new", to: "homes#index"
-  get "/users/:id/friend_requests", to: "homes#index"
-  get "/users/:id/playlist_invites", to: "homes#index"
 
   get "/playlists/:id", to: "homes#index"
   get "/users/:id/playlist_invites/:playlist_id/submissions/new", to: "homes#index"

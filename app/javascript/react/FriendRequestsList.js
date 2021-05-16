@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { List, ListItem } from "@material-ui/core"
 import { useSelector } from "react-redux"
 import { selectFriendRequests } from "./reducers/UserFriendRequestSlice"
 import { selectUser } from "./reducers/UserInfoSlice"
@@ -13,17 +14,11 @@ const FriendRequestsList = (props) => {
   const requestList = friendRequests.map((request) => {
     if(request.sender.id != user.id){
       return(
-        <li key={request.sender.id} className="grid-x grid-margin-x callout rounded blue">
-          <div className="cell small-1">
+        <ListItem key={request.sender.id} divider={true}>
             <UserProfilePhoto user={request.sender}/>
-          </div>
-          <div className="cell small-2">
             <h4>{request.sender.username}</h4>
-          </div>
-          <div>
             <FriendButton otherUserId={request.sender.id}/>
-          </div>
-        </li>
+        </ListItem>
       )
     }
   })
@@ -31,9 +26,9 @@ const FriendRequestsList = (props) => {
   return(
     <div className="list">
       <h2 className="underlined">Friend Requests</h2>
-      <ul className="list">
+      <List>
         {requestList}
-      </ul>
+      </List>
     </div>
   )
 }

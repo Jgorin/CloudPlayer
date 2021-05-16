@@ -1,4 +1,5 @@
 import React from "react"
+import { List, ListItem } from "@material-ui/core"
 import { useSelector } from "react-redux"
 import { selectSongs } from "./reducers/SubmissionFormSlice"
 import SongFormTile from "./SongFormTile"
@@ -13,20 +14,10 @@ const SubmissionSongs = (props) => {
     )
   })
 
-  if(songList.length < 5){
-    songList.push(
-      <li className="grid-x text-left callout rounded" key={songList.length}>
-        <div className="cell small-10">
-          <h4 className="text-center">New Song</h4>
-        </div>
-      </li>
-    )  
-  }
-
   return(
-    <ul>
+    <List className="added-songs">
       {songList}
-    </ul>
+    </List>
   )
 }
 

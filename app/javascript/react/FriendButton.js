@@ -1,4 +1,5 @@
 import React from "react"
+import { Button } from "@material-ui/core"
 import { useDispatch, useSelector } from "react-redux"
 import { selectUser } from "./reducers/UserInfoSlice"
 import { addFriendship, selectFriendships } from "./reducers/UserFriendSlice"
@@ -45,7 +46,7 @@ const FriendButton = (props) => {
   let outgoingFriendRequestId
   let incomingFriendRequestId
   let friendshipId
-  let className = "friendButton"
+  let color = "primary"
   let declineButton
 
   let friendship = friendships.find(friendship => friendship.friend.id == otherUserId)
@@ -60,29 +61,30 @@ const FriendButton = (props) => {
     label = "Delete Friend"
     action = deleteFriendshipWrapper
     friendshipId = friendship.id
-    className += " salmon"
+    color = "secondary"
   }
   else if(friendRequestIncoming != null){
     label = "Accept Friend Request"
     action = acceptFriendRequestWrapper
     incomingFriendRequestId = friendRequestIncoming.id
-    className += " lightColor"
-    declineButton = <p className="friendButton salmon" onClick={deleteFriendRequestWrapper}>Decline Friend Request</p>
+    color = "primary"
+    declineButton = <Button color="secondary" variant="contained" onClick={deleteFriendRequestWrapper}>Decline Friend Request</Button>
   }
   else if(friendRequestOutgoing != null){
     label = "Cancel Friend Request"
     action = cancelFriendRequestWrapper
     outgoingFriendRequestId = friendRequestOutgoing.id
-    className += " grey"
+    color = "default"
   }
   else{
     label = "Send Friend Request"
     action = sendFriendRequestWrapper
+    color = "primary"
   }
 
   return(
     <div className="grid-x">
-      <a><p onClick={action} className={className}>{label}</p></a>
+      <Button onClick={action} color={color} variant="contained">{label}</Button>
       {declineButton}
     </div>
   )

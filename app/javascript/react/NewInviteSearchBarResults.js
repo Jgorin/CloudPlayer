@@ -1,6 +1,7 @@
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { addUser, removeUser } from "./reducers/InvitationFormSlice"
+import { List, ListItem } from "@material-ui/core"
+import { useDispatch } from "react-redux"
+import { addUser } from "./reducers/InvitationFormSlice"
 import UserProfilePhoto from "./UserProfilePhoto"
 
 const NewInviteSearchBarResults = (props) => {
@@ -27,17 +28,17 @@ const NewInviteSearchBarResults = (props) => {
     }
 
     return(
-      <li key={result.id} onClick={handleClick}>
+      <ListItem key={result.id} onClick={handleClick} divider={true}>
         <UserProfilePhoto user={result}/>
         <a>{result.username}</a>
-      </li>
+      </ListItem>
     )
   })
 
   return(
-    <ul className="callout rounded overlap">
+    <List className="white overlap callout">
       {resultsList}
-    </ul>
+    </List>
   )
 }
 

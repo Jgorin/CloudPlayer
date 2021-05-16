@@ -2,8 +2,10 @@ import React from "react"
 import { useDispatch } from "react-redux"
 import { removeUser } from "./reducers/InvitationFormSlice"
 import UserProfilePhoto from "./UserProfilePhoto"
+import { ListItem } from "@material-ui/core"
 
 const PlaylistInviteListTile = (props) => {
+  const { user } = props
   const dispatch = useDispatch()
 
   const handleClick = () => {
@@ -11,12 +13,10 @@ const PlaylistInviteListTile = (props) => {
   }
 
   return(
-    <div onClick={handleClick}>
-      <div className="callout rounded">
-        <UserProfilePhoto user={props.user}/>
-        <a><p>{props.user.username}</p></a>
-      </div>
-    </div>
+    <ListItem onClick={handleClick} divider={true}>
+        <UserProfilePhoto user={user}/>
+        <a><p>{user.username}</p></a>
+    </ListItem>
   )
 }
 

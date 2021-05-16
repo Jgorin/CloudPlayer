@@ -1,14 +1,65 @@
-import React, { useEffect } from "react"
-import { NavLink } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { AppBar, Toolbar, Typography, Tabs, Tab, Box, Button } from '@material-ui/core';
 import { useSelector, useDispatch } from "react-redux"
 import { selectUser } from "./reducers/UserInfoSlice"
 import { selectFriendRequests } from "./reducers/UserFriendRequestSlice"
 import { selectPlaylistInvites } from "./reducers/UserPlaylistInviteSlice"
+import FriendsList from "./FriendsList"
+import FriendRequestsList from "./FriendRequestsList"
+import PlaylistInvitesList from "./PlaylistInvitesList"
+import PlaylistScreen from "./PlaylistScreen"
 import SearchBar from "./SearchBar"
 import RootFetch from "./fetches/RootFetch"
 import UserProfilePhoto from "./UserProfilePhoto"
+import { Modal, Fade, Backdrop, makeStyles } from "@material-ui/core"
+import PlaylistForm from "./PlaylistForm"
+import { selectValue, setTabValue, setPlaylistModalOpen } from "./reducers/TopBarSlice";
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          {children}
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index) {
+  return {
+    id: `scrollable-auto-tab-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 const UserTopBar = (props) => {
+  const value = useSelector(selectValue)
+  // const[newPlaylistModalOpen, setNewPlaylistModalOpen] = useState(false)
+  const classes = useStyles()
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
   const playlistInvites = useSelector(selectPlaylistInvites)
@@ -25,20 +76,71 @@ const UserTopBar = (props) => {
     playlistInvitesLabel += ` (${playlistInvitesLength})`
   }
 
+  const handleChange = (event, newValue) => {
+    dispatch(setTabValue(newValue))
+  }
+
   useEffect(() => {
     RootFetch(dispatch)
   }, [])
 
+  const handleOpen = () => {
+    dispatch(setPlaylistModalOpen(true));
+  };
+
+  const handleClose = () => {
+    dispatch(setPlaylistModalOpen(false));
+  };
+
   return(
-    <div className="userTopBar menu">
-      <UserProfilePhoto user={user}/>
-      <h2>{user.username}</h2>
-      <NavLink to={`/users/${user.id}/friends`} className="selectable"><h4>Friends</h4></NavLink>
-      <NavLink to={`/users/${user.id}/friend_requests`} className="selectable"><h4>{friendRequestLabel}</h4></NavLink>
-      <NavLink to={`/users/${user.id}/playlist_invites`} className="selectable"><h4>{playlistInvitesLabel}</h4></NavLink>
-      <NavLink to={`/users/${user.id}/playlists`} className="selectable"><h4>Playlists</h4></NavLink>
-      <SearchBar/>
-      <NavLink to={`/users/${user.id}/playlists/new`} className="button large text-center vertical-center">New Playlist</NavLink>
+    <div>
+      <AppBar position="static" className="medium-blue">
+        <Toolbar>
+        <UserProfilePhoto user={user}/>
+          <Typography variant="h6">
+            {user.username}
+          </Typography>
+          <Tabs value={value.tabValue} onChange={handleChange} aria-label="simple tabs example" variant="scrollable" scrollButtons="auto">
+            <Tab label="Friends" {...a11yProps(0)} />
+            <Tab label={friendRequestLabel} {...a11yProps(1)} />
+            <Tab label={playlistInvitesLabel} {...a11yProps(2)} />
+            <Tab label="Playlists" {...a11yProps(3)} />
+          </Tabs>
+          <SearchBar/>
+          <Button variant="contained" className="salmon" onClick={handleOpen}>New Playlist</Button>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={value.newPlaylistModalOpen}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={value.newPlaylistModalOpen}>
+              <div className="white" style={{"borderRadius": "25px"}}>
+                <PlaylistForm/>
+              </div>
+            </Fade>
+          </Modal>
+        </Toolbar>
+      </AppBar>
+
+      <TabPanel value={value.tabValue} index={0}>
+        <FriendsList/>
+      </TabPanel>
+      <TabPanel value={value.tabValue} index={1}>
+        <FriendRequestsList/>
+      </TabPanel>
+      <TabPanel value={value.tabValue} index={2}>
+        <PlaylistInvitesList/>
+      </TabPanel>
+      <TabPanel value={value.tabValue} index={3}>
+        <PlaylistScreen/>
+      </TabPanel>
     </div>
   )
 }
