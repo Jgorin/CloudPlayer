@@ -31,7 +31,6 @@ const PlaylistForm = (props) => {
     })
     const response = await createPlaylist(user.id, title, invitedIds)
     if(!response.error){
-      debugger
       dispatch(addInvite(response.playlist_invite))
       dispatch(setTitle(""))
       dispatch(setInvites([]))

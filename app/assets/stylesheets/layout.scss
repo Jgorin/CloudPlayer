@@ -17,7 +17,7 @@ html, body{
 }
 
 .indent{
-  margin-left: 5%;
+  margin-left: 5% !important;
 }
 
 .vertical-center{
@@ -152,4 +152,8 @@ a{
 
 .medium-blue{
   background-color: $medium-blue !important;
+}
+
+.align-right{
+  text-align: right !important;
 }

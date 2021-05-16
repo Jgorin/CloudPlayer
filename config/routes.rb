@@ -21,10 +21,8 @@ Rails.application.routes.draw do
       end
 
       resources :playlists, only: [:show] do
-        collection do
-          get "playback_controls"
-        end
         resources :songs, only: [:create, :destroy]
+        post "export"
       end
 
       resources :users, only: [:show] do
