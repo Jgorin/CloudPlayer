@@ -96,17 +96,17 @@ const UserTopBar = (props) => {
     <div>
       <AppBar position="static" className="medium-blue">
         <Toolbar>
-        <UserProfilePhoto user={user}/>
+          <UserProfilePhoto user={user}/>
           <Typography variant="h6">
             {user.username}
           </Typography>
+          <SearchBar/>
           <Tabs value={value.tabValue} onChange={handleChange} aria-label="simple tabs example" variant="scrollable" scrollButtons="auto">
             <Tab label="Friends" {...a11yProps(0)} />
             <Tab label={friendRequestLabel} {...a11yProps(1)} />
             <Tab label={playlistInvitesLabel} {...a11yProps(2)} />
             <Tab label="Playlists" {...a11yProps(3)} />
           </Tabs>
-          <SearchBar/>
           <Button variant="contained" className="salmon" onClick={handleOpen}>New Playlist</Button>
           <Modal
             aria-labelledby="transition-modal-title"
