@@ -14,7 +14,7 @@ const Playlist = (props) => {
   })
 
   return(
-    <List>
+    <List className="songlist">
       {songList}
     </List>
   )

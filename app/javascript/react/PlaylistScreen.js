@@ -9,10 +9,10 @@ const PlaylistScreen = (props) => {
     <div className="list">
       <h2 className="underlined">Playlists</h2>
       <div className="grid-x grid-margin-x">
-        <div className="cell small-2">
+        <div className="cell small-4 medium-3">
           <PlaylistList/>
         </div>
-        <div className="cell small-10 callout playlistdisplay">
+        <div className="cell small-8 medium-9 callout playlistdisplay">
           <PlaylistDisplay/>
         </div>
       </div>

@@ -49,10 +49,10 @@ const PlaylistDisplay = (props) => {
   return(
     <div>
       <div className="grid-x">
-        <div className="cell small-11">
+        <div className="cell small-8 medium-9 large-11">
           <h2 className="text-center float">{playlistLabel}</h2>
         </div>
-        <div className="cell small-1">
+        <div className="cell small-4 medium-3 large-1">
           <div className="align-right">
             {exportButton}
           </div>
