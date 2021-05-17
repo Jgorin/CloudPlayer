@@ -1,3 +1,5 @@
+require "base64"
+
 module SpotifyApi
 
   def self.get_recommendations(session, seed_tracks)
@@ -98,6 +100,22 @@ module SpotifyApi
         "Authorization": "Bearer #{token}"
       }
     )
+  end
+
+  def self.refresh_token(session)
+
+    response = Faraday.post(
+      "https://accounts.spotify.com/api/token",
+      {
+        grant_type: "refresh_token",
+        refresh_token: session[:credentials]["refresh_token"],
+      },
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': "basic #{Base64.encode64(ENV["SPOTIFY_CLIENT_ID"])}:#{Base64.encode64(ENV["SPOTIFY_SECRET"])}"
+      }
+    )
+    binding.pry
   end
 
   private

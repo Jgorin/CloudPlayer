@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApiController
+  before_action :authenticate_user!
+
   def show
     render json: current_user, serializer: UserShowSerializer
   end
