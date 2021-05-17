@@ -14,12 +14,18 @@ bundle exec rake:db migrate
 
 ## Usage
 
-Run these commands on separate terminal tabs
+To start the program on a local server, run these commands on separate terminal tabs.
 ```
 Rails s
 yarn run start
 ```
 and visit http://localhost:3000/
+
+# TODO
+
+1. refresh spotify access token automatically
+2. delete playlists
+3. Custom names of playlists when exporting
 
 ## How to contribute
 
