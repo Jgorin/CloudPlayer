@@ -14,6 +14,7 @@ import UserProfilePhoto from "./UserProfilePhoto"
 import { Modal, Fade, Backdrop, makeStyles } from "@material-ui/core"
 import PlaylistForm from "./PlaylistForm"
 import { selectValue, setTabValue, setPlaylistModalOpen } from "./reducers/TopBarSlice";
+import HelpButton from "./HelpButton"
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -92,6 +93,11 @@ const UserTopBar = (props) => {
     dispatch(setPlaylistModalOpen(false));
   };
 
+  let newPlaylistButton = <Button variant="contained" className="salmon" onClick={handleOpen}>New Playlist</Button>
+  if(user.provider != "spotify"){
+    newPlaylistButton = <Button variant="contained" className="disabled">New Playlist</Button>
+  }
+
   return(
     <div>
       <AppBar position="static" className="medium-blue">
@@ -107,7 +113,7 @@ const UserTopBar = (props) => {
             <Tab label={playlistInvitesLabel} {...a11yProps(2)} />
             <Tab label="Playlists" {...a11yProps(3)} />
           </Tabs>
-          <Button variant="contained" className="salmon" onClick={handleOpen}>New Playlist</Button>
+          {newPlaylistButton}
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
@@ -126,6 +132,7 @@ const UserTopBar = (props) => {
               </div>
             </Fade>
           </Modal>
+          <HelpButton/>
         </Toolbar>
       </AppBar>
 
