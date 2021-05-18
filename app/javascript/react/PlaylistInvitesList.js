@@ -49,12 +49,22 @@ const PlaylistInvitesList = (props) => {
       dispatch(setSelectedInvite(null))
     }
 
+    let deleteButtonLabel = "Decline"
+    if(invite.sender.id == user.id){
+      deleteButtonLabel = "Delete"
+    }
+
+    let sender = invite.sender.username
+    if(invite.sender.id == user.id){
+      sender += "(You)"
+    }
+
     return(
       <ListItem key={invite.id} divider={true}>
         <UserProfilePhoto user={invite.sender}/>
-        <h4>{`${invite.playlist.title} - from ${invite.sender.username}`}</h4>
+        <h4>{`${invite.playlist.title} - from ${sender}`}</h4>
         <Button variant="contained" color="primary" onClick={select}>Add Submission</Button>
-        <Button variant="contained" onClick={declinePlaylistInviteWrapper} color="secondary">Decline</Button>
+        <Button variant="contained" onClick={declinePlaylistInviteWrapper} color="secondary">{deleteButtonLabel}</Button>
         <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"

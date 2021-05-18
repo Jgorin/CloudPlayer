@@ -48,7 +48,7 @@ const NewInviteSearchBar = (props) => {
   return(
     <div>
       <form className="rounded" onSubmit={handleSubmit}>
-        <label htmlFor="inviteName">Invite Friends</label>
+        <label htmlFor="inviteName">Invite Friends (Spotify Accounts Only)</label>
         <input type="text" id="inviteName" name="inviteName" onChange={handleChange} value={state.query} autoComplete="off"/>
       </form>
       {results}
@@ -66,7 +66,7 @@ const searchFriends = (friendships, invitationList, query, userId) => {
     else{
       friend = friendship.friend
     }
-    if(friend.username.toLowerCase().startsWith(query.toLowerCase()) && !invitationList.includes(friend)){
+    if(friend.username.toLowerCase().startsWith(query.toLowerCase()) && !invitationList.includes(friend) && friend.provider == "spotify"){
       results.push(friend)
     }
   })
