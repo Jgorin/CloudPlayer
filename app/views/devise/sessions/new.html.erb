@@ -20,12 +20,15 @@
       </div>
     <% end %>
 
+    <%= link_to user_spotify_omniauth_authorize_path, method: :post do%>
+      <div class="spotify-login-button">
+        Sign in with <%=image_tag("Spotify_Icon_RGB_White.png", class: "spotify-login")%>
+      </div>
+    <% end %>
+
     <div class="actions">
       <%= f.submit "Log in", class: "button large"%>
     </div>
-  <% end %>
-  <%= link_to user_spotify_omniauth_authorize_path, method: :post, class: "spotify-login-button" do%>
-    Login with Spotify <%= image_tag("Spotify_Icon_RGB_White.png", class: "spotify-login")%>
   <% end %>
 </div>
 
