@@ -6,8 +6,8 @@
 }
 
 .spotify-login{
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 }
 
 .spotify-login-button{
@@ -16,4 +16,14 @@
   border-radius: 40px !important;
   padding: 18px;
   color: white;
+  pointer-events: none;
+  width: 190px;
+}
+
+.ub{
+  display: none;
+}
+
+.sbm{
+  margin-top: 20px !important;
 }
